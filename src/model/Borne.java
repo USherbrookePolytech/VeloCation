@@ -20,7 +20,7 @@ public class Borne
      * @param nombreVelosDispo
      * @param listSocle
      */
-    public Borne(int id, int nombreVelosMax, int nombreVelosDispo, ArrayList<Socle> listSocle)
+    public Borne()
     {
         this.id = 72;
         this.nombreVelosMax = 5;

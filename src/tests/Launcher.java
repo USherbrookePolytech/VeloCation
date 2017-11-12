@@ -1,22 +1,18 @@
-/**
- * 
- */
 package tests;
 
+import view.AbstractView;
+
 /**
- * @author Bebo
- *
+ * Classe principale
  */
 public class Launcher
 {
-
     /**
      * @param args
      */
     public static void main(String[] args)
     {
-        // TODO Auto-generated method stub
-
+        // Permet d'initialiser la vue d'accueil.
+        AbstractView.initView();
     }
-
 }
