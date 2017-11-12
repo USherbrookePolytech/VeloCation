@@ -12,7 +12,7 @@ public class Session
     {
         this.listMembre = new ArrayList<Membre>();
         this.membre = null;
-        this.borne = new Borne()
+        this.borne = new Borne();
     }
 
     public void connexion(int id)

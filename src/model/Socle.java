@@ -5,9 +5,8 @@ package model;
  */
 public class Socle
 {
-
     private int id;
-    private boolean utiliser;
+    private boolean dispo;
     private boolean utilisable;
     private Velo velo;
 
@@ -19,10 +18,10 @@ public class Socle
      * @param utilisable
      * @param velo
      */
-    public Socle(int id, boolean utiliser, boolean utilisable, Velo velo)
+    public Socle(int id, boolean dispo, boolean utilisable, Velo velo)
     {
         this.id = id;
-        this.utiliser = utiliser;
+        this.dispo = dispo;
         this.utilisable = utilisable;
         this.velo = velo;
     }
