@@ -1,11 +1,8 @@
-/**
- * 
- */
 package controller;
 
 /**
- * @author Bebo
- *
+ * Controler principal qui permet l'accès au modèle grace à l'attribut de type
+ * Session
  */
 public abstract class AbstractController
 {
@@ -20,9 +17,9 @@ public abstract class AbstractController
     {
 
     }
-    
+
     public void afficherCarte()
     {
-        
+
     }
 }
