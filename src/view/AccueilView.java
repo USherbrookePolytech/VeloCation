@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import controller.AbstractController;
 import controller.AccueilController;
 import controller.ConnexionTempoController;
 import controller.InscriptionController;
@@ -32,18 +31,13 @@ public class AccueilView extends AbstractView
     
     /**
      * Constructeur de confort
-     * 
-     * @param accueilController
-     * @param connexionTempoController
-     * @param inscriptionController
-     * @param profilController
      */
-    public AccueilView(AccueilController accueilController, ConnexionTempoController connexionTempoController, InscriptionController inscriptionController, ProfilController profilController)
+    public AccueilView()
     {
-        this.accueilController = accueilController;
-        this.connexionTempoController = connexionTempoController;
-        this.inscriptionController = inscriptionController;
-        this.profilController = profilController;
+        this.accueilController = new AccueilController();
+        this.connexionTempoController = new ConnexionTempoController();
+        this.inscriptionController = new InscriptionController();
+        this.profilController = new ProfilController();
         
         init();
     }
