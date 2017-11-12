@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controller.AbstractController;
 import controller.AccueilController;
 import controller.ConnexionTempoController;
 import controller.InscriptionController;
@@ -20,7 +21,7 @@ import controller.ProfilController;
  * Vue qui s'occupe de la page d'accueil et de ses liens (inscription,
  * connexionTempo, profil)
  */
-public class AccueilView
+public class AccueilView extends AbstractView
 {
     private AccueilController accueilController;
     private ConnexionTempoController connexionTempoController;
