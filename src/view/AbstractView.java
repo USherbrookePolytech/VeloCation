@@ -6,5 +6,11 @@ package view;
  */
 public abstract class AbstractView
 {
-    
+    protected static AccueilView accueilView;
+
+    // Initialisation de la vue d'accueil
+    public static void initView()
+    {
+        accueilView = new AccueilView();
+    }
 }
