@@ -3,6 +3,8 @@
  */
 package tests;
 
+import view.AbstractView;
+
 /**
  * @author Bebo
  *
@@ -15,8 +17,7 @@ public class Launcher
      */
     public static void main(String[] args)
     {
-        // TODO Auto-generated method stub
-
+        AbstractView.initView();
     }
 
 }
