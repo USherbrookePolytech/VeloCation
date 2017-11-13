@@ -11,35 +11,40 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import controller.AccueilController;
 import controller.ConnexionTempoController;
 import controller.InscriptionController;
+import controller.LouerController;
 import controller.ProfilController;
 
-/**
- * Vue qui s'occupe de la page d'accueil et de ses liens (inscription,
- * connexionTempo, profil)
- */
-public class AccueilView extends AbstractView
+public class AccueilView
 {
-    private AccueilController accueilController;
+    private InscriptionView inscriptionView;
+    private ProfilView profilView;
+    private ConnexionTempoView connexionTempoView;
+    private LouerView louerView;
+    
     private ConnexionTempoController connexionTempoController;
     private InscriptionController inscriptionController;
+    private LouerController louerController;
     private ProfilController profilController;
-    
+
     private JFrame frmAccueil;
     
-    /**
-     * Constructeur de confort
-     */
     public AccueilView()
     {
-        this.accueilController = new AccueilController();
-        this.connexionTempoController = new ConnexionTempoController();
-        this.inscriptionController = new InscriptionController();
-        this.profilController = new ProfilController();
+        louerView = new LouerView();
+        louerController = new LouerController(louerView);
+               
+        profilView = new ProfilView(louerController);
+        profilController = new ProfilController(profilView);
         
-        init();
+        inscriptionView = new InscriptionView(profilController);
+        inscriptionController = new InscriptionController(inscriptionView);
+            
+        connexionTempoView = new ConnexionTempoView(louerController);
+        connexionTempoController = new ConnexionTempoController(connexionTempoView);
+
+        init();         
     }
     
     private void init()
@@ -140,7 +145,8 @@ public class AccueilView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // TODO
+                frmAccueil.setVisible(false);
+                profilController.connexion();
             }      
         });
         

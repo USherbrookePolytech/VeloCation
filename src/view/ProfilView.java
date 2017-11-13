@@ -31,15 +31,60 @@ public class ProfilView extends AbstractView
     private LouerController louerController;
     
     private JFrame frmMonProfil;
+    private JFrame frmScannerVotreCarte;
     
-    public ProfilView(ProfilController profilController, LouerController louerController)
+    public ProfilView(LouerController louerController)
     {
-        this.profilController = profilController;
+        this.profilController = new ProfilController(this);
         this.louerController = louerController;
         
         initProfil();
+        initConnexionCarte();
     }
     
+    private void initConnexionCarte()
+    {
+        frmScannerVotreCarte = new JFrame();
+        frmScannerVotreCarte.setTitle("Scanner votre carte");
+        frmScannerVotreCarte.setBounds(100, 100, 450, 151);
+        frmScannerVotreCarte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        JButton CxCarteBtnAnnuler = new JButton("Annuler");
+        
+        JLabel CxCarteLblScannerVotreCarte = new JLabel("Scanner votre carte sur le lecteur");
+        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));
+        
+        JButton CxCarteBtnAide = new JButton("Aide");
+        GroupLayout groupLayout = new GroupLayout(frmScannerVotreCarte.getContentPane());
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(81)
+                    .addComponent(CxCarteLblScannerVotreCarte)
+                    .addContainerGap(81, Short.MAX_VALUE))
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addContainerGap(371, Short.MAX_VALUE)
+                    .addComponent(CxCarteBtnAide, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap())
+                .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+                    .addGap(183)
+                    .addComponent(CxCarteBtnAnnuler)
+                    .addContainerGap(182, Short.MAX_VALUE))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(CxCarteBtnAide)
+                    .addGap(10)
+                    .addComponent(CxCarteLblScannerVotreCarte)
+                    .addGap(18)
+                    .addComponent(CxCarteBtnAnnuler)
+                    .addContainerGap(156, Short.MAX_VALUE))
+        );
+        frmScannerVotreCarte.getContentPane().setLayout(groupLayout);
+    }
+
     private void initProfil()
     {
         frmMonProfil = new JFrame();
@@ -305,5 +350,21 @@ public class ProfilView extends AbstractView
         ProfilScrollPaneInfoAbonnement.setViewportView(ProfilTableInfoAbonnement);
         ProfilPanelInfoAbonnement.setLayout(gl_ProfilPanelInfoAbonnement);
         ProfilPanel.setLayout(gl_ProfilPanel);
+    }
+
+    /**
+     * @return the frmMonProfil
+     */
+    public JFrame getFrmMonProfil()
+    {
+        return frmMonProfil;
+    }
+
+    /**
+     * @return the frmScannerVotreCarte
+     */
+    public JFrame getFrmScannerVotreCarte()
+    {
+        return frmScannerVotreCarte;
     }
 }

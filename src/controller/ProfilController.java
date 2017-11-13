@@ -9,6 +9,11 @@ public class ProfilController extends AbstractController
 {
     private ProfilView profilView;
 
+    public ProfilController(ProfilView profilViewArg)
+    {
+        this.profilView = profilViewArg;
+    }
+
     public void afficherInfos()
     {
 
@@ -47,5 +52,10 @@ public class ProfilController extends AbstractController
     public void supprimerCompte()
     {
 
+    }
+
+    public void connexion()
+    {
+        profilView.getFrmScannerVotreCarte().setVisible(true);
     }
 }

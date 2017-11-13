@@ -32,10 +32,10 @@ public class InscriptionView extends AbstractView
     private JFrame frmInscription;
     private JFrame frmAbonnement;
         
-    public InscriptionView(InscriptionController inscriptionController, ProfilController profilController)
+    public InscriptionView(ProfilController profilControllerArg)
     {
-        this.inscriptionController = inscriptionController;
-        this.profilController = profilController;
+        this.inscriptionController = new InscriptionController(this);
+        this.profilController = profilControllerArg;
         
         initInscription();
         initAbonnement();

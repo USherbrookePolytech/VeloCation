@@ -26,16 +26,10 @@ public class ConnexionTempoView extends AbstractView
     private JFrame frmConnexionTemporaire;
     private JFrame frmConnexionTempValidation;
     
-    /**
-     * Constructeur de confort
-     * 
-     * @param connexionTempoController
-     * @param louerController
-     */
-    public ConnexionTempoView(ConnexionTempoController connexionTempoController, LouerController louerController)
+    public ConnexionTempoView(LouerController louerControllerArg)
     {
-        this.connexionTempoController = connexionTempoController;
-        this.louerController = louerController;
+        this.connexionTempoController = new ConnexionTempoController(this);
+        this.louerController = louerControllerArg;
         
         initConnexionTempNumero();
         initConnexionTempValidation();

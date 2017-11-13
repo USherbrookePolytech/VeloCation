@@ -9,6 +9,14 @@ public class InscriptionController extends AbstractController
 {
     private InscriptionView inscriptionView;
 
+    /**
+     * @param inscriptionViewArg
+     */
+    public InscriptionController(InscriptionView inscriptionViewArg)
+    {
+        this.inscriptionView = inscriptionViewArg;
+    }
+
     public void inscrireMembre()
     {
 

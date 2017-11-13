@@ -9,6 +9,11 @@ public class LouerController extends AbstractController
 {
     private LouerView louerView;
 
+    public LouerController(LouerView louerViewArg)
+    {
+        this.louerView = louerViewArg;
+    }
+
     public void location()
     {
 

@@ -11,6 +11,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
+import model.Session;
+
 /**
  * Vue principale du package. L'accès au contrôleur est établi grâce à
  * l'attribut de type AccueilView
@@ -20,7 +22,7 @@ public abstract class AbstractView
     protected static AccueilView accueilView;
     
     private static JFrame frmContacter;
-
+    
     // Initialisation de la vue d'accueil
     public static void initView()
     {

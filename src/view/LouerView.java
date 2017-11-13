@@ -31,9 +31,9 @@ public class LouerView extends AbstractView
     private JFrame frmLouer;
     private JFrame frmPaiement;
     
-    public LouerView(LouerController louerController)
+    public LouerView()
     {
-        this.louerController = louerController;
+        this.louerController = new LouerController(this);
         
         initLouer();
         initPaiement();
