@@ -111,13 +111,16 @@ public class AccueilView
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // TODO
+                frmAccueil.setVisible(false);
+                inscriptionController.inscrireMembre();
             }      
         });
         
         JButton AccueilBtnSeConnecterTemp = new JButton("Se Connecter - Sans compte");
         AccueilBtnSeConnecterTemp.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                frmAccueil.setVisible(false);
+                connexionTempoController.numTel();
             }
         });
         GridBagConstraints gbc_AccueilBtnSeConnecterTemp = new GridBagConstraints();

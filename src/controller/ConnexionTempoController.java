@@ -14,13 +14,14 @@ public class ConnexionTempoController extends AbstractController
         this.connexionTempoView = connexionTempoViewArg;
     }
 
-    public void recupererNumTel()
+    public void numTel()
     {
-
+        connexionTempoView.getFrmConnexionTemporaire().setVisible(true);
     }
-
-    public void comparerCode()
+    
+    private void validation()
     {
-
+        connexionTempoView.getFrmConnexionTemporaire().setVisible(false);
+        connexionTempoView.getFrmConnexionTempValidation().setVisible(true);
     }
 }

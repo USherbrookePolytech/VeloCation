@@ -217,4 +217,20 @@ public class ConnexionTempoView extends AbstractView
         );
         frmConnexionTemporaire.getContentPane().setLayout(groupLayout);
     }
+
+    /**
+     * @return the frmConnexionTemporaire
+     */
+    public JFrame getFrmConnexionTemporaire()
+    {
+        return frmConnexionTemporaire;
+    }
+
+    /**
+     * @return the frmConnexionTempValidation
+     */
+    public JFrame getFrmConnexionTempValidation()
+    {
+        return frmConnexionTempValidation;
+    }
 }

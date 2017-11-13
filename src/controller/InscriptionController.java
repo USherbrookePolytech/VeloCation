@@ -19,6 +19,6 @@ public class InscriptionController extends AbstractController
 
     public void inscrireMembre()
     {
-
+        inscriptionView.getFrmInscription().setVisible(true);
     }
 }

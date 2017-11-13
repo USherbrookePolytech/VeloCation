@@ -445,4 +445,20 @@ public class InscriptionView extends AbstractView
         CreationPanelVous.setLayout(gl_CreationPanelVous);
         frmInscription.getContentPane().setLayout(groupLayout);
     }
+
+    /**
+     * @return the frmInscription
+     */
+    public JFrame getFrmInscription()
+    {
+        return frmInscription;
+    }
+
+    /**
+     * @return the frmAbonnement
+     */
+    public JFrame getFrmAbonnement()
+    {
+        return frmAbonnement;
+    }
 }
