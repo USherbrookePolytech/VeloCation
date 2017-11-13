@@ -99,10 +99,6 @@ public class AccueilView
         frmAccueil.getContentPane().add(AccueilBtnSinscrire, gbc_AccueilBtnSinscrire);
         
         JButton AccueilBtnSeConnecterTemp = new JButton("Se Connecter - Sans compte");
-        AccueilBtnSeConnecterTemp.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-            }
-        });
         GridBagConstraints gbc_AccueilBtnSeConnecterTemp = new GridBagConstraints();
         gbc_AccueilBtnSeConnecterTemp.fill = GridBagConstraints.BOTH;
         gbc_AccueilBtnSeConnecterTemp.insets = new Insets(0, 0, 5, 5);
@@ -111,10 +107,6 @@ public class AccueilView
         frmAccueil.getContentPane().add(AccueilBtnSeConnecterTemp, gbc_AccueilBtnSeConnecterTemp);
         
         JButton AccueilBtnSeConnecter = new JButton("S'identifier - Compte client");
-        AccueilBtnSeConnecter.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         
         JLabel AccueilLblOu = new JLabel("ou");
         AccueilLblOu.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -131,10 +123,6 @@ public class AccueilView
         frmAccueil.getContentPane().add(AccueilBtnSeConnecter, gbc_AccueilBtnSeConnecter);
         
         JButton AccueilBtnAfficherCarte = new JButton("Carte bornes");
-        AccueilBtnAfficherCarte.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         GridBagConstraints gbc_AccueilBtnAfficherCarte = new GridBagConstraints();
         gbc_AccueilBtnAfficherCarte.fill = GridBagConstraints.BOTH;
         gbc_AccueilBtnAfficherCarte.gridwidth = 3;
