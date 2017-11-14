@@ -107,6 +107,7 @@ public class ProfilView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                frmScannerVotreCarte.setVisible(false);
                 profilController.connexion();           
             }
 
