@@ -8,6 +8,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -28,6 +29,7 @@ public class ConnexionTempoView extends AbstractView
     
     private JTextField CxTempTextFieldCode;
     private JTextField CxTempTextFieldNumero;
+    private JTextField CxTempValidationTextFieldCode;
 
     public ConnexionTempoView(LouerController louerControllerArg)
     {
@@ -56,7 +58,7 @@ public class ConnexionTempoView extends AbstractView
         
         JLabel CxTempValidationLblCodeReu = new JLabel("Code (3 chiffres)");
         
-        JTextField CxTempValidationTextFieldCode = new JTextField();
+        CxTempValidationTextFieldCode = new JTextField();
         CxTempValidationTextFieldCode.setColumns(10);
         
         JLabel CxTempValidationLblEx = new JLabel("(ex : 243)");
@@ -133,9 +135,25 @@ public class ConnexionTempoView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                frmConnexionTempValidation.setVisible(false);
-                connexionTempoController.creerUserTemp(CxTempTextFieldCode.getText(), CxTempTextFieldNumero.getText());
-                louerController.location();
+                try {
+                    Integer.parseInt(CxTempValidationTextFieldCode.getText());  
+                    
+                    if(CxTempValidationTextFieldCode.getText().length() != 3)
+                        throw new Exception("Erreur ! Le code doit être 3 chiffres !");
+                    
+                    frmConnexionTempValidation.setVisible(false);
+                    connexionTempoController.creerUserTemp(CxTempTextFieldCode.getText(), CxTempTextFieldNumero.getText());
+                    louerController.location();
+                }
+                catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le code !", "Dialog", JOptionPane.ERROR_MESSAGE);
+                    exception.printStackTrace();
+                }
+                catch (Exception exception)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
+                    exception.printStackTrace();
+                }                
             }
         });
 
@@ -234,8 +252,15 @@ public class ConnexionTempoView extends AbstractView
         {
             public void actionPerformed(ActionEvent e)
             {
-                frmConnexionTemporaire.setVisible(false);
-                frmConnexionTempValidation.setVisible(true);
+                try {
+                    Integer.parseInt(CxTempTextFieldNumero.getText());
+                    frmConnexionTemporaire.setVisible(false);
+                    frmConnexionTempValidation.setVisible(true);
+                }
+                catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le numero !", "Dialog", JOptionPane.ERROR_MESSAGE);
+                    exception.printStackTrace();
+                }                    
             }
         });
         
