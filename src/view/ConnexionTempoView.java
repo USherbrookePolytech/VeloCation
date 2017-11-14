@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.LineBorder;
 
 import controller.ConnexionTempoController;
 import controller.LouerController;
@@ -147,11 +149,13 @@ public class ConnexionTempoView extends AbstractView
                     louerController.location();
                 }
                 catch (NumberFormatException exception) {
+                    CxTempValidationTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le code !", "Dialog", JOptionPane.ERROR_MESSAGE);
                     exception.printStackTrace();
                 }
                 catch (Exception exception)
                 {
+                    CxTempValidationTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
                     exception.printStackTrace();
                 }                
@@ -255,12 +259,26 @@ public class ConnexionTempoView extends AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 try {
+                    if(CxTempTextFieldCode.getText().isEmpty())
+                        throw new Exception("Erreur dans le code du pays !");
+                    else
+                        CxTempTextFieldCode.setBorder(null);
+                    
                     Integer.parseInt(CxTempTextFieldNumero.getText());
+                    CxTempTextFieldNumero.setBorder(null);                    
+                    
                     frmConnexionTemporaire.setVisible(false);
                     frmConnexionTempValidation.setVisible(true);
                 }
                 catch (NumberFormatException exception) {
+                    CxTempTextFieldNumero.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le numero !", "Dialog", JOptionPane.ERROR_MESSAGE);
+                    exception.printStackTrace();
+                }
+                catch (Exception exception)
+                {
+                    CxTempTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
+                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
                     exception.printStackTrace();
                 }                    
             }
