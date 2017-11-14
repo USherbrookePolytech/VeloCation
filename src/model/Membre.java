@@ -11,4 +11,12 @@ public abstract class Membre
     private int id;
     private String numTel;
     private ArrayList<Location> listLocation;
+    
+    /**
+     * @return the id
+     */
+    public int getId()
+    {
+        return id;
+    }
 }

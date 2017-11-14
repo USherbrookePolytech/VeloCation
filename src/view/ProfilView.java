@@ -106,9 +106,9 @@ public class ProfilView extends AbstractView
 
             @Override
             public void actionPerformed(ActionEvent e)
-            {
-                frmScannerVotreCarte.setVisible(false);
-                profilController.connexion();           
+            {                
+                if(profilController.connexion(13253634)) // Ceci est l'id card quand le périphérique scanner lit la carte (on simule)
+                    frmScannerVotreCarte.setVisible(false);
             }
 
         });

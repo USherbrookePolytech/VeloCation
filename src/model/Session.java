@@ -15,9 +15,26 @@ public class Session
         this.borne = new Borne();
     }
 
-    public void connexion(int id)
+    public boolean connexion(int id)
     {
-
+        for(int boucle = 0; boucle < listMembre.size(); boucle++) {
+            if(id == listMembre.get(boucle).getId()) {
+                membre = listMembre.get(boucle);
+                return true;
+            }
+        }
+        
+        if(membre == null)
+            try
+            {
+                throw new Exception("Utilisateur non trouvé");                
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        
+        return false;
     }
 
     public void deconnection()

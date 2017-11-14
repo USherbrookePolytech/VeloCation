@@ -59,8 +59,11 @@ public class ProfilController extends AbstractController
         profilView.getFrmScannerVotreCarte().setVisible(true);
     }
 
-    public void connexion()
+    public boolean connexion(int id)
     {
-        profilView.getFrmMonProfil().setVisible(true);
+        if(session.connexion(id))
+            profilView.getFrmMonProfil().setVisible(true);
+        
+        return false;
     }
 }
