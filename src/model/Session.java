@@ -15,7 +15,7 @@ public class Session
         this.borne = new Borne();
     }
 
-    public boolean connexion(int id)
+    public boolean connexion(int id) throws Exception
     {
         for(int boucle = 0; boucle < listMembre.size(); boucle++) {
             if(id == listMembre.get(boucle).getId()) {
@@ -31,7 +31,7 @@ public class Session
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                throw e;
             }
         
         return false;
@@ -42,9 +42,9 @@ public class Session
 
     }
 
-    public void nouveauAbo(String nom, String prenom, String adresse, Abonnement abonnement)
+    public void nouveauAbo(String nom, String prenom, String numTel, String adresse, Abonnement abonnement)
     {
-
+        listMembre.add(new MembreAbonne(listMembre.size(), nom, prenom, numTel, adresse, abonnement, null));
     }
 
     public void supprimer(int id)

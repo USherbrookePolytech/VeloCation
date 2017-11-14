@@ -10,10 +10,12 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
@@ -32,6 +34,8 @@ public class ProfilView extends AbstractView
 
     private JFrame frmMonProfil;
     private JFrame frmScannerVotreCarte;
+    
+    private JTextField CxCarteTxtId;
 
     public ProfilView(LouerController louerController)
     {
@@ -46,36 +50,64 @@ public class ProfilView extends AbstractView
     {
         frmScannerVotreCarte = new JFrame();
         frmScannerVotreCarte.setTitle("Scanner votre carte");
-        frmScannerVotreCarte.setBounds(100, 100, 450, 151);
+        frmScannerVotreCarte.setBounds(100, 100, 450, 176);
         frmScannerVotreCarte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         JButton CxCarteBtnAnnuler = new JButton("Annuler");
-
+        
         JLabel CxCarteLblScannerVotreCarte = new JLabel("Scanner votre carte sur le lecteur");
         CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));
-
+        
         JButton CxCarteBtnAide = new JButton("Aide");
-
+        
         JButton CxCarteBtnScanner = new JButton("Scanner");
+        
+        CxCarteTxtId = new JTextField();
+        CxCarteTxtId.setColumns(10);
+        
+        JLabel CxCarteLblVotreId = new JLabel("Votre id :");
         GroupLayout groupLayout = new GroupLayout(frmScannerVotreCarte.getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-                .createSequentialGroup()
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
-                        groupLayout.createSequentialGroup().addContainerGap().addComponent(CxCarteLblScannerVotreCarte)
-                                .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE).addComponent(
-                                        CxCarteBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(groupLayout.createSequentialGroup().addGap(183).addComponent(CxCarteBtnAnnuler)))
-                .addContainerGap()).addGroup(
-                        groupLayout
-                                .createSequentialGroup().addGap(96).addComponent(CxCarteBtnScanner,
-                                        GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(96)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup().addContainerGap()
-                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(CxCarteBtnAide)
-                                .addComponent(CxCarteLblScannerVotreCarte))
-                        .addPreferredGap(ComponentPlacement.RELATED).addComponent(CxCarteBtnScanner).addGap(12)
-                        .addComponent(CxCarteBtnAnnuler).addContainerGap(14, Short.MAX_VALUE)));
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(CxCarteLblScannerVotreCarte)
+                            .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                            .addComponent(CxCarteBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(116)
+                            .addComponent(CxCarteLblVotreId)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap())
+                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+                    .addGap(97)
+                    .addComponent(CxCarteBtnScanner, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addGap(85))
+                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+                    .addContainerGap(189, Short.MAX_VALUE)
+                    .addComponent(CxCarteBtnAnnuler)
+                    .addGap(176))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(CxCarteBtnAide)
+                        .addComponent(CxCarteLblScannerVotreCarte))
+                    .addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(CxCarteLblVotreId)
+                        .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                    .addComponent(CxCarteBtnScanner)
+                    .addGap(11)
+                    .addComponent(CxCarteBtnAnnuler)
+                    .addGap(33))
+        );
         frmScannerVotreCarte.getContentPane().setLayout(groupLayout);
 
         // ActionListener
@@ -107,8 +139,18 @@ public class ProfilView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {                
-                if(profilController.connexion(13253634)) // Ceci est l'id card quand le périphérique scanner lit la carte (on simule)
+                try {
+                if(profilController.connexion(Integer.parseInt(CxCarteTxtId.getText()))) // Ceci est l'id card quand le périphérique scanner lit la carte (on simule)
                     frmScannerVotreCarte.setVisible(false);
+                }
+                catch (NumberFormatException exception) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Erreur dans l'id !", "Dialog", JOptionPane.ERROR_MESSAGE);
+                    exception.printStackTrace();
+                }                
+                catch(Exception exception) {
+                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
+                    exception.printStackTrace();
+                }
             }
 
         });

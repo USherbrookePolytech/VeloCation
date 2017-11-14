@@ -1,5 +1,6 @@
 package tests;
 
+import controller.AbstractController;
 import view.AbstractView;
 
 /**
@@ -14,5 +15,6 @@ public class Launcher
     {
         // Permet d'initialiser la vue d'accueil.
         AbstractView.initView();
+        AbstractController.init();
     }
 }
