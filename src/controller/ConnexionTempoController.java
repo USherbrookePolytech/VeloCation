@@ -24,4 +24,9 @@ public class ConnexionTempoController extends AbstractController
         connexionTempoView.getFrmConnexionTemporaire().setVisible(false);
         connexionTempoView.getFrmConnexionTempValidation().setVisible(true);
     }
+
+    public void creerUserTemp(String code, String num)
+    {
+        session.connexionTemp(code + num);
+    }
 }

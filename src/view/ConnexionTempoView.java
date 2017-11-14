@@ -25,6 +25,9 @@ public class ConnexionTempoView extends AbstractView
 
     private JFrame frmConnexionTemporaire;
     private JFrame frmConnexionTempValidation;
+    
+    private JTextField CxTempTextFieldCode;
+    private JTextField CxTempTextFieldNumero;
 
     public ConnexionTempoView(LouerController louerControllerArg)
     {
@@ -131,6 +134,7 @@ public class ConnexionTempoView extends AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 frmConnexionTempValidation.setVisible(false);
+                connexionTempoController.creerUserTemp(CxTempTextFieldCode.getText(), CxTempTextFieldNumero.getText());
                 louerController.location();
             }
         });
@@ -162,11 +166,11 @@ public class ConnexionTempoView extends AbstractView
 
         JLabel CxTempLblNumro = new JLabel("Numéro");
 
-        JTextField CxTempTextFieldCode = new JTextField();
+        CxTempTextFieldCode = new JTextField();
         CxTempTextFieldCode.setText("+33");
         CxTempTextFieldCode.setColumns(10);
 
-        JTextField CxTempTextFieldNumero = new JTextField();
+        CxTempTextFieldNumero = new JTextField();
         CxTempTextFieldNumero.setColumns(10);
 
         JButton CxTempBtnAnnuler = new JButton("Annuler");

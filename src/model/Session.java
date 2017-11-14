@@ -37,7 +37,7 @@ public class Session
 
     public void connexionTemp(String numTel)
     {
-
+        listMembre.add(new MembreTemp(numTel));
     }
 
     public void louer(Membre membre)
