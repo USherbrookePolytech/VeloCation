@@ -8,7 +8,7 @@ import model.Session;
  */
 public abstract class AbstractController
 {
-    protected static Session session = new Session();;
+    protected static Session session = new Session();
 
     public void afficherAide()
     {
