@@ -45,7 +45,7 @@ public class ConnexionTempoView extends AbstractView
         JLabel CxTempValidationLblSaisirLeCode = new JLabel("Saisir le code reçu par SMS :");
         CxTempValidationLblSaisirLeCode.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-        JButton CxTempValidationBtn = new JButton("Aide");
+        JButton CxTempValidationBtnAide = new JButton("Aide");
 
         JLabel CxTempValidationLblCodeReu = new JLabel("Code (3 chiffres)");
 
@@ -61,7 +61,7 @@ public class ConnexionTempoView extends AbstractView
         groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
                 .createSequentialGroup().addGap(98)
                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup().addGap(273).addComponent(CxTempValidationBtn,
+                        .addGroup(groupLayout.createSequentialGroup().addGap(273).addComponent(CxTempValidationBtnAide,
                                 GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
                         .addGroup(groupLayout.createSequentialGroup().addGap(47)
                                 .addComponent(CxTempValidationBtnAnnuler, GroupLayout.PREFERRED_SIZE, 69,
@@ -79,7 +79,7 @@ public class ConnexionTempoView extends AbstractView
                         .addComponent(CxTempValidationLblSaisirLeCode, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                         .addGap(118)));
         groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-                .createSequentialGroup().addContainerGap().addComponent(CxTempValidationBtn).addGap(8)
+                .createSequentialGroup().addContainerGap().addComponent(CxTempValidationBtnAide).addGap(8)
                 .addComponent(CxTempValidationLblSaisirLeCode, GroupLayout.PREFERRED_SIZE, 17,
                         GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED).addComponent(CxTempValidationLblCodeReu)
@@ -97,7 +97,7 @@ public class ConnexionTempoView extends AbstractView
 
         // ActionListener
 
-        CxTempValidationBtn.addActionListener(new ActionListener()
+        CxTempValidationBtnAide.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
