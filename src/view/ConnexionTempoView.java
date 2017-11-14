@@ -101,9 +101,7 @@ public class ConnexionTempoView extends AbstractView
         {
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("test");
-                frmConnexionTemporaire.setVisible(false);
-                frmConnexionTempValidation.setVisible(true);
+                
             }
         });
 
@@ -113,7 +111,7 @@ public class ConnexionTempoView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                // TODO Auto-generated method stub
+                
             }
 
         });
@@ -142,8 +140,22 @@ public class ConnexionTempoView extends AbstractView
         CxTempTextFieldNumero.setColumns(10);
 
         JButton CxTempBtnAnnuler = new JButton("Annuler");
+        CxTempBtnAnnuler.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        });
 
         JButton CxTempBtnValider = new JButton("Valider");
+        CxTempBtnValider.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println("AAA");
+            }
+        });
 
         JButton CxTempBtnAide = new JButton("Aide");
         CxTempBtnAide.addActionListener(new ActionListener()
