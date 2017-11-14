@@ -179,7 +179,7 @@ public class AccueilView
             public void actionPerformed(ActionEvent e)
             {
                 frmAccueil.setVisible(false);
-                profilController.connexion();
+                profilController.scannerCarte();
             }      
         });
         
