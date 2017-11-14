@@ -28,7 +28,7 @@ public class AccueilView
     private LouerController louerController;
     private ProfilController profilController;
 
-    private static JFrame frmAccueil;
+    private JFrame frmAccueil;
     
     public AccueilView()
     {
@@ -55,6 +55,7 @@ public class AccueilView
         frmAccueil.setTitle("Accueil");
         frmAccueil.setBounds(100, 100, 652, 242);
         frmAccueil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmAccueil.setLocationRelativeTo(null);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{80, 191, 28, 191, 80, 0};
         gridBagLayout.rowHeights = new int[]{75, 30, 30, 30, 30, 9, 0};
@@ -194,9 +195,12 @@ public class AccueilView
         
         frmAccueil.setVisible(true);        
     }
-    
-    public static void retourAccueil()
+
+    /**
+     * @return the frmAccueil
+     */
+    public JFrame getFrmAccueil()
     {
-        frmAccueil.setVisible(true);
+        return frmAccueil;
     }
 }

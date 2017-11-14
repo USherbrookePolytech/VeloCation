@@ -52,6 +52,7 @@ public class ProfilView extends AbstractView
         frmScannerVotreCarte.setTitle("Scanner votre carte");
         frmScannerVotreCarte.setBounds(100, 100, 450, 176);
         frmScannerVotreCarte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmScannerVotreCarte.setLocationRelativeTo(null);
         
         JButton CxCarteBtnAnnuler = new JButton("Annuler");
         
@@ -119,7 +120,7 @@ public class ProfilView extends AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 frmScannerVotreCarte.setVisible(false);
-                AccueilView.retourAccueil();                
+                accueilView.getFrmAccueil().setVisible(true);             
             }
         });
 
@@ -163,6 +164,7 @@ public class ProfilView extends AbstractView
         frmMonProfil.setResizable(false);
         frmMonProfil.setBounds(100, 100, 542, 314);
         frmMonProfil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmMonProfil.setLocationRelativeTo(null);
 
         JPanel ProfilPanel = new JPanel();
         ProfilPanel.setBorder(new TitledBorder(null, "Mon Profil", TitledBorder.LEADING, TitledBorder.TOP, null, null));

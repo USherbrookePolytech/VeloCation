@@ -45,6 +45,7 @@ public class LouerView extends AbstractView
         frmLouer.setTitle("Louer");
         frmLouer.setBounds(100, 100, 450, 200);
         frmLouer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmLouer.setLocationRelativeTo(null);
         
         JPanel LouerPanel = new JPanel();
         LouerPanel.setBorder(new TitledBorder(null, "Choisir votre location", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -123,6 +124,7 @@ public class LouerView extends AbstractView
         frmPaiement.setTitle("Paiement");
         frmPaiement.setBounds(100, 100, 353, 231);
         frmPaiement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPaiement.setLocationRelativeTo(null);
         
         JPanel PaiementPanel = new JPanel();
         PaiementPanel.setBorder(new TitledBorder(null, "Proc\u00E9dez au paiement", TitledBorder.LEADING, TitledBorder.TOP, null, null));
