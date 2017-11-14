@@ -101,7 +101,7 @@ public class ConnexionTempoView extends AbstractView
         {
             public void actionPerformed(ActionEvent e)
             {
-                
+
             }
         });
 
@@ -111,9 +111,20 @@ public class ConnexionTempoView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                
+                frmConnexionTempValidation.setVisible(false);
+                louerController.location();
             }
+        });
 
+        CxTempValidationBtnAnnuler.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0)
+            {
+                frmConnexionTempValidation.setVisible(false);
+                AccueilView.retourAccueil();                
+            }
         });
 
     }
@@ -140,30 +151,10 @@ public class ConnexionTempoView extends AbstractView
         CxTempTextFieldNumero.setColumns(10);
 
         JButton CxTempBtnAnnuler = new JButton("Annuler");
-        CxTempBtnAnnuler.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                
-            }
-        });
 
-        JButton CxTempBtnValider = new JButton("Valider");
-        CxTempBtnValider.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                System.out.println("AAA");
-            }
-        });
+        JButton CxTempBtnValider = new JButton("Valider");                
 
         JButton CxTempBtnAide = new JButton("Aide");
-        CxTempBtnAide.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-            }
-        });
 
         JLabel CxTempLblEx = new JLabel("(ex : 0643302958)");
         GroupLayout groupLayout = new GroupLayout(frmConnexionTemporaire.getContentPane());
@@ -204,6 +195,33 @@ public class ConnexionTempoView extends AbstractView
                                 .addComponent(CxTempBtnValider))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         frmConnexionTemporaire.getContentPane().setLayout(groupLayout);
+        
+        // ActionListener
+        
+        CxTempBtnAnnuler.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmConnexionTemporaire.setVisible(false);
+                AccueilView.retourAccueil();  
+            }
+        });
+        
+        CxTempBtnValider.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmConnexionTemporaire.setVisible(false);
+                frmConnexionTempValidation.setVisible(true);
+            }
+        });
+        
+        CxTempBtnAide.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+            }
+        });
     }
 
     /**

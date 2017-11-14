@@ -28,7 +28,7 @@ public class AccueilView
     private LouerController louerController;
     private ProfilController profilController;
 
-    private JFrame frmAccueil;
+    private static JFrame frmAccueil;
     
     public AccueilView()
     {
@@ -192,6 +192,11 @@ public class AccueilView
             }      
         });
         
+        frmAccueil.setVisible(true);        
+    }
+    
+    public static void retourAccueil()
+    {
         frmAccueil.setVisible(true);
     }
 }

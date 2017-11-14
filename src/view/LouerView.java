@@ -210,4 +210,20 @@ public class LouerView extends AbstractView
         scrollPane.setViewportView(table);
         PaiementPanel.setLayout(gl_PaiementPanel);
     }
+
+    /**
+     * @return the frmLouer
+     */
+    public JFrame getFrmLouer()
+    {
+        return frmLouer;
+    }
+
+    /**
+     * @return the frmPaiement
+     */
+    public JFrame getFrmPaiement()
+    {
+        return frmPaiement;
+    }
 }
