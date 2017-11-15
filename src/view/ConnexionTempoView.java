@@ -53,8 +53,7 @@ public class ConnexionTempoView extends AbstractView
         JLabel CxTempValidationLblSaisirLeCode = new JLabel("Saisir le code reçu par SMS :");
         CxTempValidationLblSaisirLeCode.setFont(new Font("Tahoma", Font.BOLD, 14));
         
-        JButton CxTempValidationBtnAide = new JButton("Aide");
-        CxTempValidationBtnAide.addActionListener(new ActionListener() {
+        btnAide.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
@@ -84,7 +83,7 @@ public class ConnexionTempoView extends AbstractView
                     .addContainerGap(133, Short.MAX_VALUE))
                 .addGroup(groupLayout.createSequentialGroup()
                     .addContainerGap(344, Short.MAX_VALUE)
-                    .addComponent(CxTempValidationBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
                 .addGroup(groupLayout.createSequentialGroup()
                     .addGap(118)
@@ -101,7 +100,7 @@ public class ConnexionTempoView extends AbstractView
             groupLayout.createParallelGroup(Alignment.LEADING)
                 .addGroup(groupLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(CxTempValidationBtnAide)
+                    .addComponent(btnAide)
                     .addGap(8)
                     .addComponent(CxTempValidationLblSaisirLeCode, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
