@@ -32,6 +32,7 @@ public class AccueilView extends AbstractView
 
     public AccueilView()
     {
+        super();
         louerView = new LouerView();
         louerController = new LouerController(louerView);
 
@@ -55,6 +56,7 @@ public class AccueilView extends AbstractView
         frmAccueil.setTitle("Accueil");
         frmAccueil.setBounds(100, 100, 652, 242);
         frmAccueil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmAccueil.setLocationRelativeTo(null);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[] { 80, 191, 28, 191, 80, 0 };
         gridBagLayout.rowHeights = new int[] { 75, 30, 30, 30, 30, 9, 0 };
@@ -80,13 +82,13 @@ public class AccueilView extends AbstractView
         gbc_AccueilLblBienvenue.gridy = 1;
         frmAccueil.getContentPane().add(AccueilLblBienvenue, gbc_AccueilLblBienvenue);
 
-        JButton AccueilBtnAide = new JButton("Aide");
         GridBagConstraints gbc_AccueilBtnAide = new GridBagConstraints();
         gbc_AccueilBtnAide.fill = GridBagConstraints.BOTH;
         gbc_AccueilBtnAide.insets = new Insets(0, 0, 5, 0);
         gbc_AccueilBtnAide.gridx = 4;
         gbc_AccueilBtnAide.gridy = 1;
-        frmAccueil.getContentPane().add(AccueilBtnAide, gbc_AccueilBtnAide);
+
+        frmAccueil.getContentPane().add(btnAide, gbc_AccueilBtnAide);
 
         JButton AccueilBtnSinscrire = new JButton("S'inscrire");
         AccueilBtnSinscrire.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -132,20 +134,8 @@ public class AccueilView extends AbstractView
         frmAccueil.getContentPane().add(AccueilBtnAfficherCarte, gbc_AccueilBtnAfficherCarte);
 
         // ActionListener
-
-        AccueilBtnAide.addActionListener(new ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO
-            }
-        });
-
         AccueilBtnSinscrire.addActionListener(new ActionListener()
         {
-
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -163,31 +153,13 @@ public class AccueilView extends AbstractView
             }
         });
 
-        AccueilBtnSeConnecterTemp.addActionListener(new ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO
-            }
-        });
-
         AccueilBtnSeConnecter.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent e)
-            {
-            }
-        });
-
-        AccueilBtnSeConnecter.addActionListener(new ActionListener()
-        {
-
             @Override
             public void actionPerformed(ActionEvent e)
             {
                 frmAccueil.setVisible(false);
-                profilController.connexion();
+                profilController.scannerCarte();
             }
         });
 

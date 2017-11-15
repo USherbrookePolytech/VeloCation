@@ -13,7 +13,7 @@ public class ProfilController extends AbstractController
     {
         this.profilView = profilViewArg;
     }
-    
+
     public void afficherProfil()
     {
         profilView.getFrmMonProfil().setVisible(true);
@@ -54,8 +54,26 @@ public class ProfilController extends AbstractController
 
     }
 
-    public void connexion()
+    public void scannerCarte()
     {
         profilView.getFrmScannerVotreCarte().setVisible(true);
+    }
+
+    public boolean connexion(int id) throws Exception
+    {
+        try
+        {
+            if (session.connexion(id))
+            {
+                profilView.getFrmMonProfil().setVisible(true);
+                return true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+        return false;
     }
 }

@@ -15,9 +15,26 @@ public class Session
         this.borne = new Borne();
     }
 
-    public void connexion(int id)
+    public boolean connexion(int id) throws Exception
     {
-
+        for(int boucle = 0; boucle < listMembre.size(); boucle++) {
+            if(id == listMembre.get(boucle).getId()) {
+                membre = listMembre.get(boucle);
+                return true;
+            }
+        }
+        
+        if(membre == null)
+            try
+            {
+                throw new Exception("Utilisateur non trouvé");                
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        
+        return false;
     }
 
     public void deconnection()
@@ -25,9 +42,9 @@ public class Session
 
     }
 
-    public void nouveauAbo(String nom, String prenom, String adresse, Abonnement abonnement)
+    public void nouveauAbo(String nom, String prenom, String numTel, String adresse, Abonnement abonnement)
     {
-
+        listMembre.add(new MembreAbonne(listMembre.size(), nom, prenom, numTel, adresse, abonnement, null));
     }
 
     public void supprimer(int id)
@@ -37,7 +54,7 @@ public class Session
 
     public void connexionTemp(String numTel)
     {
-
+        listMembre.add(new MembreTemp(numTel));
     }
 
     public void louer(Membre membre)

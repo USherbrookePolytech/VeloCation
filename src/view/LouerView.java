@@ -45,6 +45,7 @@ public class LouerView extends AbstractView
         frmLouer.setTitle("Louer");
         frmLouer.setBounds(100, 100, 450, 200);
         frmLouer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmLouer.setLocationRelativeTo(null);
         
         JPanel LouerPanel = new JPanel();
         LouerPanel.setBorder(new TitledBorder(null, "Choisir votre location", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -56,9 +57,7 @@ public class LouerView extends AbstractView
         
         JLabel LouerLblVotreLocationSera = new JLabel("Votre location sera valable 24 heures");
         LouerLblVotreLocationSera.setFont(new Font("Tahoma", Font.BOLD, 14));
-        
-        JButton LouerBtnAide = new JButton("Aide");
-        
+           
         JButton LouerBtnValider = new JButton("Valider");
         
         JButton LouerBtnAnnuler = new JButton("Annuler");
@@ -68,21 +67,21 @@ public class LouerView extends AbstractView
         LouerLblCaution.setForeground(new Color(102, 0, 0));
         GroupLayout gl_LouerPanel = new GroupLayout(LouerPanel);
         gl_LouerPanel.setHorizontalGroup(
-            gl_LouerPanel.createParallelGroup(Alignment.TRAILING)
+            gl_LouerPanel.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_LouerPanel.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(gl_LouerPanel.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_LouerPanel.createSequentialGroup()
+                        .addGroup(Alignment.LEADING, gl_LouerPanel.createSequentialGroup()
                             .addComponent(LouerLblVotreLocationSera)
-                            .addPreferredGap(ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                            .addComponent(LouerBtnAide, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
                         .addGroup(gl_LouerPanel.createSequentialGroup()
                             .addComponent(LouerBtnAnnuler)
                             .addPreferredGap(ComponentPlacement.UNRELATED)
                             .addComponent(LouerBtnValider)
                             .addGap(133))))
-                .addGroup(Alignment.LEADING, gl_LouerPanel.createSequentialGroup()
+                .addGroup(gl_LouerPanel.createSequentialGroup()
                     .addGap(49)
                     .addComponent(LouerLblNombreDeVlo)
                     .addPreferredGap(ComponentPlacement.UNRELATED)
@@ -97,14 +96,14 @@ public class LouerView extends AbstractView
             gl_LouerPanel.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_LouerPanel.createSequentialGroup()
                     .addGroup(gl_LouerPanel.createParallelGroup(Alignment.LEADING)
-                        .addComponent(LouerBtnAide)
                         .addGroup(gl_LouerPanel.createSequentialGroup()
                             .addGap(21)
-                            .addComponent(LouerLblVotreLocationSera)))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addGroup(gl_LouerPanel.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(LouerLblNombreDeVlo)
-                        .addComponent(LouerSpinnerVelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LouerLblVotreLocationSera)
+                            .addPreferredGap(ComponentPlacement.UNRELATED)
+                            .addGroup(gl_LouerPanel.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(LouerLblNombreDeVlo)
+                                .addComponent(LouerSpinnerVelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAide))
                     .addGap(10)
                     .addComponent(LouerLblCaution)
                     .addPreferredGap(ComponentPlacement.UNRELATED)
@@ -123,6 +122,7 @@ public class LouerView extends AbstractView
         frmPaiement.setTitle("Paiement");
         frmPaiement.setBounds(100, 100, 353, 231);
         frmPaiement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPaiement.setLocationRelativeTo(null);
         
         JPanel PaiementPanel = new JPanel();
         PaiementPanel.setBorder(new TitledBorder(null, "Proc\u00E9dez au paiement", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -209,5 +209,21 @@ public class LouerView extends AbstractView
         table.getColumnModel().getColumn(2).setPreferredWidth(80);
         scrollPane.setViewportView(table);
         PaiementPanel.setLayout(gl_PaiementPanel);
+    }
+
+    /**
+     * @return the frmLouer
+     */
+    public JFrame getFrmLouer()
+    {
+        return frmLouer;
+    }
+
+    /**
+     * @return the frmPaiement
+     */
+    public JFrame getFrmPaiement()
+    {
+        return frmPaiement;
     }
 }

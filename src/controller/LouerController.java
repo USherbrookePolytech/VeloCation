@@ -16,7 +16,7 @@ public class LouerController extends AbstractController
 
     public void location()
     {
-
+        louerView.getFrmLouer().setVisible(true);
     }
 
     public void finirLocation()

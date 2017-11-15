@@ -65,6 +65,7 @@ public class InscriptionView extends AbstractView
         frmAbonnement.setTitle("Abonnement");
         frmAbonnement.setBounds(100, 100, 555, 429);
         frmAbonnement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmAbonnement.setLocationRelativeTo(null);
 
         JPanel AbonnementsPanel = new JPanel();
         AbonnementsPanel.setBorder(new TitledBorder(null, "Choisissez votre abonnement", TitledBorder.LEADING,
@@ -218,6 +219,7 @@ public class InscriptionView extends AbstractView
         frmInscription.setTitle("Inscription");
         frmInscription.setBounds(100, 100, 450, 504);
         frmInscription.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmInscription.setLocationRelativeTo(null);
 
         JPanel CreationPanelVous = new JPanel();
         CreationPanelVous.setBorder(
