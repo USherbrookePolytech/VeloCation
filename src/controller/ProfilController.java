@@ -13,10 +13,10 @@ public class ProfilController extends AbstractController
     {
         this.profilView = profilViewArg;
     }
-
-    public void afficherInfos()
+    
+    public void afficherProfil()
     {
-
+        profilView.getFrmMonProfil().setVisible(true);
     }
 
     public void afficherAbo()
