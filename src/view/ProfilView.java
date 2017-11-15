@@ -50,18 +50,20 @@ public class ProfilView extends AbstractView
     {
         frmScannerVotreCarte = new JFrame();
         frmScannerVotreCarte.setTitle("Scanner votre carte");
-        frmScannerVotreCarte.setBounds(100, 100, 450, 176);
+        frmScannerVotreCarte.setBounds(100, 100, 450, 184);
         frmScannerVotreCarte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmScannerVotreCarte.setLocationRelativeTo(null);
         
         JButton CxCarteBtnAnnuler = new JButton("Annuler");
         
         JLabel CxCarteLblScannerVotreCarte = new JLabel("Scanner votre carte sur le lecteur");
-        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));       
+        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));
+        
+        JButton CxCarteBtnAide = new JButton("Aide");
         
         JButton CxCarteBtnScanner = new JButton("Scanner");
         
-        CxCarteTxtId = new JTextField();
+        JTextField CxCarteTxtId = new JTextField();
         CxCarteTxtId.setColumns(10);
         
         JLabel CxCarteLblVotreId = new JLabel("Votre id :");
@@ -74,7 +76,7 @@ public class ProfilView extends AbstractView
                             .addContainerGap()
                             .addComponent(CxCarteLblScannerVotreCarte)
                             .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CxCarteBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
                         .addGroup(groupLayout.createSequentialGroup()
                             .addGap(116)
                             .addComponent(CxCarteLblVotreId)
@@ -95,7 +97,7 @@ public class ProfilView extends AbstractView
                 .addGroup(groupLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(btnAide)
+                        .addComponent(CxCarteBtnAide)
                         .addComponent(CxCarteLblScannerVotreCarte))
                     .addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)

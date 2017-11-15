@@ -52,15 +52,16 @@ public class ConnexionTempoView extends AbstractView
         
         JLabel CxTempValidationLblSaisirLeCode = new JLabel("Saisir le code reçu par SMS :");
         CxTempValidationLblSaisirLeCode.setFont(new Font("Tahoma", Font.BOLD, 14));
-                
-        btnAide.addActionListener(new ActionListener() {
+        
+        JButton CxTempValidationBtnAide = new JButton("Aide");
+        CxTempValidationBtnAide.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
         
         JLabel CxTempValidationLblCodeReu = new JLabel("Code (3 chiffres)");
         
-        CxTempValidationTextFieldCode = new JTextField();
+        JTextField CxTempValidationTextFieldCode = new JTextField();
         CxTempValidationTextFieldCode.setColumns(10);
         
         JLabel CxTempValidationLblEx = new JLabel("(ex : 243)");
@@ -70,7 +71,7 @@ public class ConnexionTempoView extends AbstractView
         JButton CxTempValidationBtnAnnuler = new JButton("Annuler");
         GroupLayout groupLayout = new GroupLayout(frmConnexionTempValidation.getContentPane());
         groupLayout.setHorizontalGroup(
-            groupLayout.createParallelGroup(Alignment.TRAILING)
+            groupLayout.createParallelGroup(Alignment.LEADING)
                 .addGroup(groupLayout.createSequentialGroup()
                     .addGap(174)
                     .addComponent(CxTempValidationLblCodeReu)
@@ -80,27 +81,27 @@ public class ConnexionTempoView extends AbstractView
                     .addComponent(CxTempValidationTextFieldCode, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
                     .addGap(10)
                     .addComponent(CxTempValidationLblEx)
-                    .addContainerGap(121, Short.MAX_VALUE))
+                    .addContainerGap(133, Short.MAX_VALUE))
                 .addGroup(groupLayout.createSequentialGroup()
                     .addContainerGap(344, Short.MAX_VALUE)
-                    .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CxTempValidationBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
-                .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+                .addGroup(groupLayout.createSequentialGroup()
                     .addGap(118)
                     .addComponent(CxTempValidationLblSaisirLeCode, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addGap(118))
-                .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-                    .addGap(139)
-                    .addComponent(CxTempValidationBtnAnnuler, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(114)
+                    .addComponent(CxTempValidationBtnAnnuler, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
-                    .addComponent(CxTempValidationBtnValider, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(155, Short.MAX_VALUE))
+                    .addComponent(CxTempValidationBtnValider, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(164, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
             groupLayout.createParallelGroup(Alignment.LEADING)
                 .addGroup(groupLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(btnAide)
+                    .addComponent(CxTempValidationBtnAide)
                     .addGap(8)
                     .addComponent(CxTempValidationLblSaisirLeCode, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(ComponentPlacement.RELATED)
