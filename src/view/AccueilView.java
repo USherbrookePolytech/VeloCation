@@ -16,7 +16,7 @@ import controller.InscriptionController;
 import controller.LouerController;
 import controller.ProfilController;
 
-public class AccueilView
+public class AccueilView extends AbstractView
 {
     private InscriptionView inscriptionView;
     private ProfilView profilView;
@@ -32,6 +32,7 @@ public class AccueilView
     
     public AccueilView()
     {
+        super();
         louerView = new LouerView();
         louerController = new LouerController(louerView);
                
@@ -81,13 +82,12 @@ public class AccueilView
         gbc_AccueilLblBienvenue.gridy = 1;
         frmAccueil.getContentPane().add(AccueilLblBienvenue, gbc_AccueilLblBienvenue);
         
-        JButton AccueilBtnAide = new JButton("Aide");
         GridBagConstraints gbc_AccueilBtnAide = new GridBagConstraints();
         gbc_AccueilBtnAide.fill = GridBagConstraints.BOTH;
         gbc_AccueilBtnAide.insets = new Insets(0, 0, 5, 0);
         gbc_AccueilBtnAide.gridx = 4;
         gbc_AccueilBtnAide.gridy = 1;
-        frmAccueil.getContentPane().add(AccueilBtnAide, gbc_AccueilBtnAide);
+        frmAccueil.getContentPane().add(btnAide, gbc_AccueilBtnAide);
         
         JButton AccueilBtnSinscrire = new JButton("S'inscrire");
         AccueilBtnSinscrire.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -133,16 +133,7 @@ public class AccueilView
         frmAccueil.getContentPane().add(AccueilBtnAfficherCarte, gbc_AccueilBtnAfficherCarte);
         
         // ActionListener
-        
-        AccueilBtnAide.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO
-            }      
-        });
-        
+                
         AccueilBtnSinscrire.addActionListener(new ActionListener() {
 
             @Override
@@ -159,21 +150,7 @@ public class AccueilView
                 connexionTempoController.numTel();
             }
         });
-        
-        AccueilBtnSeConnecterTemp.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO
-            }      
-        });
-        
-        AccueilBtnSeConnecter.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        
+                
         AccueilBtnSeConnecter.addActionListener(new ActionListener() {
 
             @Override

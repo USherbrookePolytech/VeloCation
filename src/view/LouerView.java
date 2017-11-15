@@ -57,9 +57,7 @@ public class LouerView extends AbstractView
         
         JLabel LouerLblVotreLocationSera = new JLabel("Votre location sera valable 24 heures");
         LouerLblVotreLocationSera.setFont(new Font("Tahoma", Font.BOLD, 14));
-        
-        JButton LouerBtnAide = new JButton("Aide");
-        
+           
         JButton LouerBtnValider = new JButton("Valider");
         
         JButton LouerBtnAnnuler = new JButton("Annuler");
@@ -76,7 +74,7 @@ public class LouerView extends AbstractView
                         .addGroup(Alignment.LEADING, gl_LouerPanel.createSequentialGroup()
                             .addComponent(LouerLblVotreLocationSera)
                             .addPreferredGap(ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                            .addComponent(LouerBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
                         .addGroup(gl_LouerPanel.createSequentialGroup()
                             .addComponent(LouerBtnAnnuler)
@@ -105,7 +103,7 @@ public class LouerView extends AbstractView
                             .addGroup(gl_LouerPanel.createParallelGroup(Alignment.BASELINE)
                                 .addComponent(LouerLblNombreDeVlo)
                                 .addComponent(LouerSpinnerVelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(LouerBtnAide))
+                        .addComponent(btnAide))
                     .addGap(10)
                     .addComponent(LouerLblCaution)
                     .addPreferredGap(ComponentPlacement.UNRELATED)

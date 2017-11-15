@@ -57,9 +57,7 @@ public class ProfilView extends AbstractView
         JButton CxCarteBtnAnnuler = new JButton("Annuler");
         
         JLabel CxCarteLblScannerVotreCarte = new JLabel("Scanner votre carte sur le lecteur");
-        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));
-        
-        JButton CxCarteBtnAide = new JButton("Aide");
+        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));       
         
         JButton CxCarteBtnScanner = new JButton("Scanner");
         
@@ -76,7 +74,7 @@ public class ProfilView extends AbstractView
                             .addContainerGap()
                             .addComponent(CxCarteLblScannerVotreCarte)
                             .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                            .addComponent(CxCarteBtnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
                         .addGroup(groupLayout.createSequentialGroup()
                             .addGap(116)
                             .addComponent(CxCarteLblVotreId)
@@ -97,7 +95,7 @@ public class ProfilView extends AbstractView
                 .addGroup(groupLayout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(CxCarteBtnAide)
+                        .addComponent(btnAide)
                         .addComponent(CxCarteLblScannerVotreCarte))
                     .addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                     .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -121,16 +119,6 @@ public class ProfilView extends AbstractView
             {
                 frmScannerVotreCarte.setVisible(false);
                 accueilView.getFrmAccueil().setVisible(true);             
-            }
-        });
-
-        CxCarteBtnAide.addActionListener(new ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO Auto-generated method stub                
             }
         });
 
@@ -172,14 +160,6 @@ public class ProfilView extends AbstractView
 
         JTabbedPane ProfilTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-        JButton ProfilBtnAide = new JButton("Aide");
-        ProfilBtnAide.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
-            }
-        });
-
         JLabel ProfilLblBonjourBienvenue = new JLabel("Bonjour ! Bienvenue sur votre profil ;)");
         ProfilLblBonjourBienvenue.setFont(new Font("Tahoma", Font.BOLD, 14));
 
@@ -195,7 +175,7 @@ public class ProfilView extends AbstractView
                                 .addGroup(Alignment.LEADING,
                                         gl_ProfilPanel.createSequentialGroup().addComponent(ProfilLblBonjourBienvenue)
                                                 .addPreferredGap(ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                                                .addComponent(ProfilBtnAide))
+                                                .addComponent(btnAide))
                                 .addGroup(Alignment.LEADING,
                                         gl_ProfilPanel.createSequentialGroup().addComponent(ProfilLblConnectEnTant)
                                                 .addPreferredGap(ComponentPlacement.RELATED)
@@ -206,7 +186,7 @@ public class ProfilView extends AbstractView
                         .addGroup(gl_ProfilPanel.createParallelGroup(Alignment.LEADING)
                                 .addGroup(gl_ProfilPanel.createSequentialGroup().addContainerGap()
                                         .addComponent(ProfilLblBonjourBienvenue))
-                                .addComponent(ProfilBtnAide))
+                                .addComponent(btnAide))
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addGroup(gl_ProfilPanel.createParallelGroup(Alignment.BASELINE)
                                 .addComponent(ProfilLblConnectEnTant).addComponent(ProfilBtnDeconnexion))
