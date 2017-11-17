@@ -1,25 +1,27 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -36,13 +38,16 @@ public class InscriptionView extends AbstractView
 
     private JFrame frmInscription;
     private JFrame frmAbonnement;
+    private JFrame frmPaiement;
+    private JFrame frmPaiementValid;
 
     private JTextField txtNom, txtPrenom, txtCourriel, txtTelephone, txtNumero, txtVille, txtCodepostal;
     private JDateChooser dateChooser;
     private JRadioButton rdbtnMr, rdbtnMlle, rdbtnMme;
     private ButtonGroup groupeRadioBtn = new ButtonGroup();
     private JLabel labelRequis1, labelRequis2, labelRequis3, labelRequis4, labelRequis5, labelRequis6, labelRequis7,
-            labelRequis8, labelRequis9;
+            labelRequis8, labelRequis9, lblPrixTotal;
+    private JTable table;
 
     /**
      * Constructeur de confort
@@ -56,6 +61,8 @@ public class InscriptionView extends AbstractView
 
         initInscription();
         initAbonnement();
+        initPaiement();
+        initValiderPaiement();
     }
 
     private void initAbonnement()
@@ -72,8 +79,28 @@ public class InscriptionView extends AbstractView
                 TitledBorder.TOP, null, null));
 
         JButton AbonnementsBtnAnnulerLinscription = new JButton("Annuler l'inscription");
+        AbonnementsBtnAnnulerLinscription.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                frmAbonnement.setVisible(false);
+                accueilView.getFrmAccueil().setVisible(true);
+                inscriptionController.hideMessage();
+                inscriptionController.resetValeur();
+                inscriptionController.setEmptyBorder();
+            }
+        });
 
         JButton AbonnementsBtnRetour = new JButton("Retour");
+        AbonnementsBtnRetour.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                frmAbonnement.setVisible(false);
+                frmInscription.setVisible(true);
+            }
+        });
+
         GroupLayout groupLayout = new GroupLayout(frmAbonnement.getContentPane());
         groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
                 .createSequentialGroup()
@@ -103,27 +130,38 @@ public class InscriptionView extends AbstractView
         AbonnementsLbl3Mois.setFont(new Font("Stencil", Font.PLAIN, 29));
 
         JButton AbonnementsBtn3Mois = new JButton("Choisir 3 mois");
+        AbonnementsBtn3Mois.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                frmAbonnement.setVisible(false);
+                frmPaiement.setVisible(true);
+                inscriptionController.paiement(2);
+            }
+        });
+
         GroupLayout gl_AbonnementsPanelAbo3 = new GroupLayout(AbonnementsPanelAbo3);
         gl_AbonnementsPanelAbo3
                 .setHorizontalGroup(
                         gl_AbonnementsPanelAbo3.createParallelGroup(Alignment.TRAILING)
                                 .addGroup(gl_AbonnementsPanelAbo3.createSequentialGroup().addContainerGap()
                                         .addGroup(gl_AbonnementsPanelAbo3.createParallelGroup(Alignment.LEADING)
+                                                .addComponent(AbonnementsLblDetail3Mois)
                                                 .addGroup(gl_AbonnementsPanelAbo3.createSequentialGroup()
-                                                        .addComponent(AbonnementsLblDetail3Mois)
-                                                        .addPreferredGap(ComponentPlacement.RELATED, 93,
+                                                        .addComponent(AbonnementsLbl3Mois)
+                                                        .addPreferredGap(ComponentPlacement.RELATED, 95,
                                                                 Short.MAX_VALUE)
-                                                        .addComponent(AbonnementsBtn3Mois))
-                                                .addComponent(AbonnementsLbl3Mois))
+                                                        .addComponent(AbonnementsBtn3Mois)))
                                         .addContainerGap()));
         gl_AbonnementsPanelAbo3.setVerticalGroup(gl_AbonnementsPanelAbo3.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_AbonnementsPanelAbo3.createSequentialGroup().addContainerGap()
-                        .addComponent(AbonnementsLbl3Mois).addGap(11)
-                        .addGroup(gl_AbonnementsPanelAbo3
-                                .createParallelGroup(Alignment.BASELINE).addComponent(AbonnementsBtn3Mois,
+                        .addComponent(AbonnementsLbl3Mois).addGap(11).addComponent(AbonnementsLblDetail3Mois)
+                        .addContainerGap())
+                .addGroup(Alignment.TRAILING,
+                        gl_AbonnementsPanelAbo3
+                                .createSequentialGroup().addGap(34).addComponent(AbonnementsBtn3Mois,
                                         GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(AbonnementsLblDetail3Mois))
-                        .addContainerGap()));
+                                .addGap(28)));
         AbonnementsPanelAbo3.setLayout(gl_AbonnementsPanelAbo3);
 
         JPanel AbonnementsPanel1An = new JPanel();
@@ -135,24 +173,35 @@ public class InscriptionView extends AbstractView
         AbonnementsLbl1An.setFont(new Font("Stencil", Font.PLAIN, 29));
 
         JButton AbonnementsBtn1An = new JButton("Choisir 1 an");
+        AbonnementsBtn1An.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                frmAbonnement.setVisible(false);
+                frmPaiement.setVisible(true);
+                inscriptionController.paiement(3);
+            }
+        });
+
         GroupLayout gl_AbonnementsPanel1An = new GroupLayout(AbonnementsPanel1An);
         gl_AbonnementsPanel1An.setHorizontalGroup(gl_AbonnementsPanel1An.createParallelGroup(Alignment.TRAILING)
                 .addGroup(gl_AbonnementsPanel1An.createSequentialGroup().addContainerGap()
                         .addGroup(gl_AbonnementsPanel1An.createParallelGroup(Alignment.LEADING)
-                                .addComponent(AbonnementsLbl1An)
-                                .addGroup(gl_AbonnementsPanel1An.createSequentialGroup()
-                                        .addComponent(AbonnementsLblDetail1An)
-                                        .addPreferredGap(ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                                        .addComponent(AbonnementsBtn1An, GroupLayout.PREFERRED_SIZE, 100,
-                                                GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(gl_AbonnementsPanel1An.createSequentialGroup().addComponent(AbonnementsLbl1An)
+                                        .addPreferredGap(ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                                        .addComponent(AbonnementsBtn1An, GroupLayout.PREFERRED_SIZE, 114,
+                                                GroupLayout.PREFERRED_SIZE))
+                                .addComponent(AbonnementsLblDetail1An))
                         .addContainerGap()));
         gl_AbonnementsPanel1An.setVerticalGroup(gl_AbonnementsPanel1An.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_AbonnementsPanel1An.createSequentialGroup().addContainerGap()
                         .addComponent(AbonnementsLbl1An).addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addGroup(gl_AbonnementsPanel1An.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(AbonnementsLblDetail1An).addComponent(AbonnementsBtn1An,
-                                        GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap()));
+                        .addComponent(AbonnementsLblDetail1An).addContainerGap())
+                .addGroup(
+                        gl_AbonnementsPanel1An
+                                .createSequentialGroup().addGap(37).addComponent(AbonnementsBtn1An,
+                                        GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(25)));
         AbonnementsPanel1An.setLayout(gl_AbonnementsPanel1An);
 
         JButton AbonnementsBtnAide = new JButton("Aide");
@@ -185,27 +234,32 @@ public class InscriptionView extends AbstractView
         {
             public void actionPerformed(ActionEvent arg0)
             {
+                frmAbonnement.setVisible(false);
+                frmPaiement.setVisible(true);
+                inscriptionController.paiement(1);
             }
         });
 
         JLabel AbonnementsLblDetail1Mois = new JLabel("Accès illimité aux bornes VeloCation 24h/24 pendant 1 mois");
         GroupLayout gl_AbonnementsPanelAbo1 = new GroupLayout(AbonnementsPanelAbo1);
-        gl_AbonnementsPanelAbo1.setHorizontalGroup(gl_AbonnementsPanelAbo1.createParallelGroup(Alignment.TRAILING)
-                .addGroup(gl_AbonnementsPanelAbo1.createSequentialGroup().addContainerGap()
-                        .addGroup(gl_AbonnementsPanelAbo1.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_AbonnementsPanelAbo1.createSequentialGroup()
-                                        .addComponent(AbonnementsLblDetail1Mois)
-                                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-                                                Short.MAX_VALUE)
-                                        .addComponent(AbonnementsBtn1Mois))
-                                .addComponent(AbonnementsLbl1Mois))
-                        .addContainerGap()));
+        gl_AbonnementsPanelAbo1
+                .setHorizontalGroup(
+                        gl_AbonnementsPanelAbo1.createParallelGroup(Alignment.TRAILING)
+                                .addGroup(gl_AbonnementsPanelAbo1.createSequentialGroup().addContainerGap()
+                                        .addGroup(gl_AbonnementsPanelAbo1.createParallelGroup(Alignment.LEADING)
+                                                .addComponent(AbonnementsLblDetail1Mois)
+                                                .addGroup(gl_AbonnementsPanelAbo1.createSequentialGroup()
+                                                        .addComponent(AbonnementsLbl1Mois)
+                                                        .addPreferredGap(ComponentPlacement.RELATED, 111,
+                                                                Short.MAX_VALUE)
+                                                        .addComponent(AbonnementsBtn1Mois)))
+                                        .addContainerGap()));
         gl_AbonnementsPanelAbo1.setVerticalGroup(gl_AbonnementsPanelAbo1.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_AbonnementsPanelAbo1.createSequentialGroup().addContainerGap()
-                        .addComponent(AbonnementsLbl1Mois).addPreferredGap(ComponentPlacement.UNRELATED)
                         .addGroup(gl_AbonnementsPanelAbo1.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(AbonnementsLblDetail1Mois).addComponent(AbonnementsBtn1Mois,
+                                .addComponent(AbonnementsLbl1Mois).addComponent(AbonnementsBtn1Mois,
                                         GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(AbonnementsLblDetail1Mois)
                         .addContainerGap()));
         AbonnementsPanelAbo1.setLayout(gl_AbonnementsPanelAbo1);
         AbonnementsPanel.setLayout(gl_AbonnementsPanel);
@@ -234,6 +288,7 @@ public class InscriptionView extends AbstractView
         {
             public void actionPerformed(ActionEvent arg0)
             {
+                inscriptionController.resetValeur();
             }
         });
 
@@ -257,49 +312,39 @@ public class InscriptionView extends AbstractView
             {
                 frmInscription.setVisible(false);
                 accueilView.getFrmAccueil().setVisible(true);
+                inscriptionController.hideMessage();
+                inscriptionController.resetValeur();
+                inscriptionController.setEmptyBorder();
             }
         });
 
         JLabel lblChampObligatoire = new JLabel("<html><font color='red'>* Champs obligatoires</font></html>");
         GroupLayout groupLayout = new GroupLayout(frmInscription.getContentPane());
-        groupLayout.setHorizontalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addGap(88)
-                            .addComponent(CreationBtnRetour)
-                            .addGap(18)
-                            .addComponent(CreationBtnReinitialiser)
-                            .addGap(18)
-                            .addComponent(CreationBtnValider))
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblChampObligatoire))
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(CreationPanelVous, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(20, Short.MAX_VALUE))
-        );
-        groupLayout.setVerticalGroup(
-            groupLayout.createParallelGroup(Alignment.TRAILING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGap(16)
-                    .addComponent(CreationPanelVous, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addComponent(CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                    .addComponent(lblChampObligatoire)
-                    .addGap(18)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(CreationBtnReinitialiser)
-                        .addComponent(CreationBtnValider)
-                        .addComponent(CreationBtnRetour))
-                    .addGap(15))
-        );
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+                .createSequentialGroup()
+                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup().addGap(88).addComponent(CreationBtnRetour)
+                                .addGap(18).addComponent(CreationBtnReinitialiser).addGap(18)
+                                .addComponent(CreationBtnValider))
+                        .addGroup(
+                                groupLayout.createSequentialGroup().addContainerGap().addComponent(lblChampObligatoire))
+                        .addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(CreationPanelVous,
+                                GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(
+                                CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup().addGap(16)
+                        .addComponent(CreationPanelVous, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addComponent(CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(lblChampObligatoire).addGap(18)
+                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(CreationBtnReinitialiser).addComponent(CreationBtnValider)
+                                .addComponent(CreationBtnRetour))
+                        .addGap(15)));
 
         JLabel lblNumero = new JLabel("<html>Adresse <font color='red'>*</font></html>");
         lblNumero.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -336,50 +381,46 @@ public class InscriptionView extends AbstractView
         labelRequis4.setForeground(Color.RED);
         labelRequis4.setFont(new Font("Tahoma", Font.PLAIN, 10));
         GroupLayout gl_CreationPanelAdresse = new GroupLayout(CreationPanelAdresse);
-        gl_CreationPanelAdresse.setHorizontalGroup(
-            gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_CreationPanelAdresse.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
-                        .addComponent(lblVille, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.TRAILING)
-                            .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCodePostal, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)))
-                    .addGap(18)
-                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING, false)
-                        .addComponent(txtNumero, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                        .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtVille, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                    .addPreferredGap(ComponentPlacement.RELATED)
-                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
-                        .addComponent(labelRequis1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelRequis2, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelRequis3, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelRequis4, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        gl_CreationPanelAdresse.setVerticalGroup(
-            gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_CreationPanelAdresse.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelRequis1)
-                        .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelRequis2)
-                        .addComponent(lblCodePostal))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(txtVille, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelRequis3)
-                        .addComponent(lblVille))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addComponent(labelRequis4)
-                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gl_CreationPanelAdresse.setHorizontalGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_CreationPanelAdresse.createSequentialGroup().addContainerGap()
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                                .addComponent(lblVille, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.TRAILING)
+                                        .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE,
+                                                61, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblCodePostal, GroupLayout.PREFERRED_SIZE, 75,
+                                                GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18)
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING, false)
+                                .addComponent(txtNumero, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtVille, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                                .addComponent(labelRequis1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRequis2, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRequis3, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRequis4, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        gl_CreationPanelAdresse.setVerticalGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_CreationPanelAdresse.createSequentialGroup().addContainerGap()
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRequis1)
+                                .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRequis2).addComponent(lblCodePostal))
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(txtVille, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRequis3).addComponent(lblVille))
+                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(labelRequis4)
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         CreationPanelAdresse.setLayout(gl_CreationPanelAdresse);
 
         txtNom = new JTextField();
@@ -424,7 +465,7 @@ public class InscriptionView extends AbstractView
         rdbtnMlle = new JRadioButton("Mlle");
 
         groupeRadioBtn = new ButtonGroup();
-        
+
         groupeRadioBtn.add(rdbtnMr);
         groupeRadioBtn.add(rdbtnMlle);
         groupeRadioBtn.add(rdbtnMme);
@@ -563,6 +604,152 @@ public class InscriptionView extends AbstractView
         frmInscription.getContentPane().setLayout(groupLayout);
     }
 
+    private void initPaiement()
+    {
+        frmPaiement = new JFrame();
+        frmPaiement.setResizable(false);
+        frmPaiement.setTitle("Paiement");
+        frmPaiement.setBounds(100, 100, 377, 233);
+        frmPaiement.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPaiement.setLocationRelativeTo(null);
+
+        JPanel PaiementPanel = new JPanel();
+        PaiementPanel.setBorder(new TitledBorder(null, "Proc\u00E9dez au paiement", TitledBorder.LEADING,
+                TitledBorder.TOP, null, null));
+        frmPaiement.getContentPane().add(PaiementPanel, BorderLayout.CENTER);
+
+        JButton PaiementBtnPayerViaPaypal = new JButton("Payer via Paypal");
+        PaiementBtnPayerViaPaypal.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmPaiement.setVisible(false);
+                frmPaiementValid.setVisible(true);
+            }
+        });
+
+        JButton PaiementBtnAbandonner = new JButton("Abandonner");
+        PaiementBtnAbandonner.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmPaiement.setVisible(false);
+                inscriptionController.hideMessage();
+                inscriptionController.resetValeur();
+                inscriptionController.setEmptyBorder();
+                accueilView.getFrmAccueil().setVisible(true);
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane();
+
+        lblPrixTotal = new JLabel("Prix total : 310$ CAN");
+        lblPrixTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+        JButton btnRetour = new JButton("Retour");
+        btnRetour.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmPaiement.setVisible(false);
+                frmAbonnement.setVisible(true);
+            }
+        });
+
+        JButton btnAide = new JButton("Aide");
+        GroupLayout gl_PaiementPanel = new GroupLayout(PaiementPanel);
+        gl_PaiementPanel
+                .setHorizontalGroup(gl_PaiementPanel.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_PaiementPanel.createSequentialGroup().addContainerGap()
+                                .addGroup(gl_PaiementPanel.createParallelGroup(Alignment.TRAILING)
+                                        .addGroup(Alignment.LEADING,
+                                                gl_PaiementPanel.createSequentialGroup().addComponent(
+                                                        scrollPane, GroupLayout.PREFERRED_SIZE, 338,
+                                                        GroupLayout.PREFERRED_SIZE).addContainerGap())
+                                        .addGroup(gl_PaiementPanel.createSequentialGroup().addComponent(btnRetour)
+                                                .addGap(22)
+                                                .addGroup(gl_PaiementPanel.createParallelGroup(Alignment.LEADING)
+                                                        .addComponent(lblPrixTotal).addGroup(
+                                                                gl_PaiementPanel.createSequentialGroup()
+                                                                        .addComponent(PaiementBtnAbandonner)
+                                                                        .addPreferredGap(ComponentPlacement.RELATED)
+                                                                        .addComponent(PaiementBtnPayerViaPaypal,
+                                                                                GroupLayout.PREFERRED_SIZE, 138,
+                                                                                GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(34))))
+                        .addGroup(Alignment.TRAILING, gl_PaiementPanel.createSequentialGroup()
+                                .addContainerGap(271, Short.MAX_VALUE).addComponent(btnAide).addGap(42)));
+        gl_PaiementPanel.setVerticalGroup(gl_PaiementPanel.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_PaiementPanel.createSequentialGroup().addComponent(btnAide).addGap(11)
+                        .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblPrixTotal).addGap(15)
+                        .addGroup(gl_PaiementPanel.createParallelGroup(Alignment.BASELINE).addComponent(btnRetour)
+                                .addComponent(PaiementBtnAbandonner).addComponent(PaiementBtnPayerViaPaypal,
+                                        GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(17, Short.MAX_VALUE)));
+
+        table = new JTable();
+        table.setModel(new DefaultTableModel(new Object[][] { { "", "", null }, { "", "", null }, },
+                new String[] { "Qte", "Libell\u00E9", "Prix uni. $CAN" })
+        {
+            Class[] columnTypes = new Class[] { Object.class, Object.class, Integer.class };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return columnTypes[columnIndex];
+            }
+        });
+        table.getColumnModel().getColumn(0).setPreferredWidth(32);
+        table.getColumnModel().getColumn(1).setResizable(false);
+        table.getColumnModel().getColumn(1).setPreferredWidth(96);
+        table.getColumnModel().getColumn(2).setResizable(false);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        scrollPane.setViewportView(table);
+        PaiementPanel.setLayout(gl_PaiementPanel);
+    }
+
+    public void initValiderPaiement()
+    {
+        frmPaiementValid = new JFrame();
+        frmPaiementValid.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPaiementValid.setResizable(false);
+        frmPaiementValid.setBounds(0, 0, 192, 120);
+        frmPaiementValid.setLocationRelativeTo(null);
+
+        JLabel lblPaiementValid = new JLabel("Paiement validé");
+
+        JButton btnAppuyerPourContinuer = new JButton("Appuyer pour continuer");
+        btnAppuyerPourContinuer.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmPaiementValid.setVisible(false);
+                profilController.getProfilView().getFrmMonProfil().setVisible(true);
+            }
+        });
+
+        GroupLayout groupLayout = new GroupLayout(frmPaiementValid.getContentPane());
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup()
+                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                .addGroup(groupLayout.createSequentialGroup().addGap(50).addComponent(lblPaiementValid))
+                                .addGroup(groupLayout.createSequentialGroup().addContainerGap()
+                                        .addComponent(btnAppuyerPourContinuer)))
+                        .addContainerGap(29, Short.MAX_VALUE)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup().addGap(21).addComponent(lblPaiementValid).addGap(18)
+                        .addComponent(btnAppuyerPourContinuer).addContainerGap(16, Short.MAX_VALUE)));
+        frmPaiementValid.getContentPane().setLayout(groupLayout);
+    }
+
+    /**
+     * @return the table
+     */
+    public JTable getTable()
+    {
+        return table;
+    }
+
     /**
      * @return the frmInscription
      */
@@ -609,6 +796,23 @@ public class InscriptionView extends AbstractView
     public JTextField getTxtTelephone()
     {
         return txtTelephone;
+    }
+
+    /**
+     * @return the lblPrixTotal
+     */
+    public JLabel getLblPrixTotal()
+    {
+        return lblPrixTotal;
+    }
+
+    /**
+     * @param lblPrixTotal
+     *            the lblPrixTotal to set
+     */
+    public void setLblPrixTotal(JLabel lblPrixTotal)
+    {
+        this.lblPrixTotal = lblPrixTotal;
     }
 
     /**
@@ -722,5 +926,4 @@ public class InscriptionView extends AbstractView
     {
         return labelRequis9;
     }
-
 }

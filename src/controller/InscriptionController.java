@@ -3,8 +3,11 @@ package controller;
 import java.awt.Color;
 import java.util.Locale;
 
+import javax.swing.BorderFactory;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import sun.font.CreatedFontTracker;
 import view.InscriptionView;
 
 /**
@@ -144,5 +147,71 @@ public class InscriptionController extends AbstractController
             inscriptionView.getTxtCourriel().setBorder(new LineBorder(Color.RED, 2));
 
         return estValide;
+    }
+
+    public void resetValeur()
+    {
+        inscriptionView.getGroupeRadioBtn().clearSelection();
+        inscriptionView.getTxtNom().setText("");
+        inscriptionView.getTxtPrenom().setText("");
+        inscriptionView.getTxtTelephone().setText("");
+        inscriptionView.getDateChooser().setCalendar(null);
+        inscriptionView.getTxtCourriel().setText("");
+        inscriptionView.getTxtNumero().setText("");
+        inscriptionView.getTxtCodepostal().setText("");
+        inscriptionView.getTxtVille().setText("");
+
+        setEmptyBorder();
+        hideMessage();
+    }
+
+    public void setEmptyBorder()
+    {
+        inscriptionView.getTxtNom().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getTxtPrenom().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getTxtTelephone().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getDateChooser().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getTxtCourriel().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getTxtNumero().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getTxtCodepostal().setBorder(UIManager.getBorder("TextField.border"));
+        inscriptionView.getTxtVille().setBorder(UIManager.getBorder("TextField.border"));
+    }
+
+    public void hideMessage()
+    {
+        inscriptionView.getLabelRequis1().setText("");
+        inscriptionView.getLabelRequis2().setText("");
+        inscriptionView.getLabelRequis3().setText("");
+        inscriptionView.getLabelRequis4().setText("");
+        inscriptionView.getLabelRequis5().setText("");
+        inscriptionView.getLabelRequis6().setText("");
+        inscriptionView.getLabelRequis7().setText("");
+        inscriptionView.getLabelRequis8().setText("");
+        inscriptionView.getLabelRequis9().setText("");
+    }
+
+    public void paiement(int i)
+    {
+        if (i == 1)
+        {
+            inscriptionView.getLblPrixTotal().setText("Prix total : 50$ CAN");
+            inscriptionView.getTable().getModel().setValueAt("1", 0, 0);
+            inscriptionView.getTable().getModel().setValueAt("Abonnement", 0, 1);
+            inscriptionView.getTable().getModel().setValueAt("50", 0, 2);
+        }
+        else if (i == 2)
+        {
+            inscriptionView.getLblPrixTotal().setText("Prix total : 130$ CAN");
+            inscriptionView.getTable().getModel().setValueAt("1", 0, 0);
+            inscriptionView.getTable().getModel().setValueAt("Abonnement", 0, 1);
+            inscriptionView.getTable().getModel().setValueAt("130", 0, 2);
+        }
+        else
+        {
+            inscriptionView.getLblPrixTotal().setText("Prix total : 540$ CAN");
+            inscriptionView.getTable().getModel().setValueAt("1", 0, 0);
+            inscriptionView.getTable().getModel().setValueAt("Abonnement", 0, 1);
+            inscriptionView.getTable().getModel().setValueAt("540", 0, 2);
+        }
     }
 }

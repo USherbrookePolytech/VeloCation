@@ -68,11 +68,20 @@ public class ProfilController extends AbstractController
                 profilView.getFrmMonProfil().setVisible(true);
                 return true;
             }
-        }catch (Exception e)
+        }
+        catch (Exception e)
         {
             throw e;
         }
 
         return false;
+    }
+
+    /**
+     * @return the profilView
+     */
+    public ProfilView getProfilView()
+    {
+        return profilView;
     }
 }
