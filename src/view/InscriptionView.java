@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -38,7 +39,6 @@ public class InscriptionView extends AbstractView
 
     private JTextField txtNom, txtPrenom, txtCourriel, txtTelephone, txtNumero, txtVille, txtCodepostal;
     private JDateChooser dateChooser;
-    private JComboBox comboBoxPays;
     private JRadioButton rdbtnMr, rdbtnMlle, rdbtnMme;
     private ButtonGroup groupeRadioBtn = new ButtonGroup();
     private JLabel labelRequis1, labelRequis2, labelRequis3, labelRequis4, labelRequis5, labelRequis6, labelRequis7,
@@ -217,7 +217,7 @@ public class InscriptionView extends AbstractView
         frmInscription = new JFrame();
         frmInscription.setResizable(false);
         frmInscription.setTitle("Inscription");
-        frmInscription.setBounds(100, 100, 450, 504);
+        frmInscription.setBounds(100, 100, 450, 470);
         frmInscription.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmInscription.setLocationRelativeTo(null);
 
@@ -242,7 +242,11 @@ public class InscriptionView extends AbstractView
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                inscriptionController.verifierInscription();
+                if (inscriptionController.verifierInscription())
+                {
+                    frmInscription.setVisible(false);
+                    frmAbonnement.setVisible(true);
+                }
             }
         });
 
@@ -258,32 +262,44 @@ public class InscriptionView extends AbstractView
 
         JLabel lblChampObligatoire = new JLabel("<html><font color='red'>* Champs obligatoires</font></html>");
         GroupLayout groupLayout = new GroupLayout(frmInscription.getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-                .createSequentialGroup()
-                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup().addGap(88).addComponent(CreationBtnRetour)
-                                .addGap(18).addComponent(CreationBtnReinitialiser).addGap(18)
-                                .addComponent(CreationBtnValider))
-                        .addGroup(
-                                groupLayout.createSequentialGroup().addContainerGap().addComponent(lblChampObligatoire))
-                        .addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(CreationPanelVous,
-                                GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(
-                                CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                .addGroup(groupLayout.createSequentialGroup().addGap(16)
-                        .addComponent(CreationPanelVous, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addComponent(CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(lblChampObligatoire).addGap(18)
-                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(CreationBtnReinitialiser).addComponent(CreationBtnValider).addComponent(
-                                        CreationBtnRetour))
-                        .addGap(15)));
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGap(88)
+                            .addComponent(CreationBtnRetour)
+                            .addGap(18)
+                            .addComponent(CreationBtnReinitialiser)
+                            .addGap(18)
+                            .addComponent(CreationBtnValider))
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblChampObligatoire))
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(CreationPanelVous, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(20, Short.MAX_VALUE))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(16)
+                    .addComponent(CreationPanelVous, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                    .addComponent(CreationPanelAdresse, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(lblChampObligatoire)
+                    .addGap(18)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(CreationBtnReinitialiser)
+                        .addComponent(CreationBtnValider)
+                        .addComponent(CreationBtnRetour))
+                    .addGap(15))
+        );
 
         JLabel lblNumero = new JLabel("<html>Adresse <font color='red'>*</font></html>");
         lblNumero.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -304,11 +320,6 @@ public class InscriptionView extends AbstractView
         JLabel lblVille = new JLabel("<html>Ville <font color='red'>*</font></html>");
         lblVille.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        JLabel lblPays = new JLabel("<html>Pays <font color='red'>*</font></html>");
-        lblPays.setHorizontalAlignment(SwingConstants.RIGHT);
-
-        comboBoxPays = new JComboBox();
-
         labelRequis1 = new JLabel("");
         labelRequis1.setForeground(Color.RED);
         labelRequis1.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -326,55 +337,49 @@ public class InscriptionView extends AbstractView
         labelRequis4.setFont(new Font("Tahoma", Font.PLAIN, 10));
         GroupLayout gl_CreationPanelAdresse = new GroupLayout(CreationPanelAdresse);
         gl_CreationPanelAdresse.setHorizontalGroup(
-                gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING).addGroup(gl_CreationPanelAdresse
-                        .createSequentialGroup().addGroup(gl_CreationPanelAdresse
-                                .createParallelGroup(Alignment.LEADING).addGroup(gl_CreationPanelAdresse
-                                        .createSequentialGroup().addContainerGap()
-                                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.TRAILING)
-                                                .addComponent(lblPays).addComponent(lblVille, GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(gl_CreationPanelAdresse.createSequentialGroup().addContainerGap()
-                                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.TRAILING)
-                                                .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 61,
-                                                        GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblCodePostal, GroupLayout.PREFERRED_SIZE, 75,
-                                                        GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18)
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING, false)
-                                .addComponent(txtNumero, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(comboBoxPays, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtVille, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
-                                .addComponent(labelRequis1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis2, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis3, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis4, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        gl_CreationPanelAdresse.setVerticalGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_CreationPanelAdresse.createSequentialGroup().addContainerGap()
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis1)
-                                .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis2).addComponent(lblCodePostal))
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(txtVille, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis3).addComponent(lblVille))
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(comboBoxPays, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelRequis4).addComponent(lblPays))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_CreationPanelAdresse.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                        .addComponent(lblVille, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                        .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.TRAILING)
+                            .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCodePostal, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)))
+                    .addGap(18)
+                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING, false)
+                        .addComponent(txtNumero, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                        .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtVille, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                    .addPreferredGap(ComponentPlacement.RELATED)
+                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                        .addComponent(labelRequis1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelRequis2, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelRequis3, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelRequis4, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        gl_CreationPanelAdresse.setVerticalGroup(
+            gl_CreationPanelAdresse.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_CreationPanelAdresse.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(txtNumero, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelRequis1)
+                        .addComponent(lblNumero, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(txtCodepostal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelRequis2)
+                        .addComponent(lblCodePostal))
+                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                    .addGroup(gl_CreationPanelAdresse.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(txtVille, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelRequis3)
+                        .addComponent(lblVille))
+                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                    .addComponent(labelRequis4)
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         CreationPanelAdresse.setLayout(gl_CreationPanelAdresse);
 
         txtNom = new JTextField();
@@ -418,6 +423,8 @@ public class InscriptionView extends AbstractView
 
         rdbtnMlle = new JRadioButton("Mlle");
 
+        groupeRadioBtn = new ButtonGroup();
+        
         groupeRadioBtn.add(rdbtnMr);
         groupeRadioBtn.add(rdbtnMlle);
         groupeRadioBtn.add(rdbtnMme);
@@ -634,14 +641,6 @@ public class InscriptionView extends AbstractView
     public JDateChooser getDateChooser()
     {
         return dateChooser;
-    }
-
-    /**
-     * @return the comboBoxPays
-     */
-    public JComboBox getComboBoxPays()
-    {
-        return comboBoxPays;
     }
 
     /**
