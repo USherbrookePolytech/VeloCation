@@ -160,7 +160,7 @@ public class ProfilView extends AbstractView
 
         JTabbedPane ProfilTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-        JLabel ProfilLblBonjourBienvenue = new JLabel("Bonjour ! Bienvenue sur votre profil ;)");
+        JLabel ProfilLblBonjourBienvenue = new JLabel("Profil");
         ProfilLblBonjourBienvenue.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         JLabel ProfilLblConnectEnTant = new JLabel("Connecté en tant que XX XXX");
@@ -198,7 +198,7 @@ public class ProfilView extends AbstractView
         ProfilTabbedPane.addTab("Location", null, ProfilPanelLocation, null);
 
         JButton ProfilBtnLouer = new JButton("Louer");
-        ProfilBtnLouer.setBackground(new Color(51, 204, 0));
+        //ProfilBtnLouer.setBackground(new Color(51, 204, 0));
 
         JLabel ProfilLblMesLocationsCours = new JLabel("Historique de mes locations :");
         ProfilLblMesLocationsCours.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -257,7 +257,8 @@ public class ProfilView extends AbstractView
         JScrollPane ProfilScrollPaneInformation = new JScrollPane();
 
         JButton ProfilBtnSeDesinscrire = new JButton("Se désinscrire");
-        ProfilBtnSeDesinscrire.setBackground(new Color(204, 0, 0));
+        //ProfilBtnSeDesinscrire.setBackground(new Color(204, 0, 0));
+        
         GroupLayout gl_ProfilPanelInformation = new GroupLayout(ProfilPanelInformation);
         gl_ProfilPanelInformation.setHorizontalGroup(gl_ProfilPanelInformation.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_ProfilPanelInformation.createSequentialGroup().addContainerGap()
@@ -307,13 +308,13 @@ public class ProfilView extends AbstractView
         JScrollPane ProfilScrollPaneInfoAbonnement = new JScrollPane();
 
         JButton ProfilButtonResilier = new JButton("Résilier");
-        ProfilButtonResilier.setBackground(new Color(255, 0, 0));
+        //ProfilButtonResilier.setBackground(new Color(255, 0, 0));
 
         JButton ProfilBtnRenouveler = new JButton("Renouveler");
-        ProfilBtnRenouveler.setBackground(new Color(51, 204, 0));
+        //ProfilBtnRenouveler.setBackground(new Color(51, 204, 0));
 
         JButton ProfilBtnChanger = new JButton("Changer");
-        ProfilBtnChanger.setBackground(new Color(102, 204, 0));
+        //ProfilBtnChanger.setBackground(new Color(102, 204, 0));
         GroupLayout gl_ProfilPanelInfoAbonnement = new GroupLayout(ProfilPanelInfoAbonnement);
         gl_ProfilPanelInfoAbonnement.setHorizontalGroup(gl_ProfilPanelInfoAbonnement
                 .createParallelGroup(Alignment.LEADING)

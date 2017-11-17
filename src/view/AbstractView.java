@@ -150,7 +150,7 @@ public abstract class AbstractView
         JTextPane textPaneInfoAbo = new JTextPane();
         textPaneInfoAbo.setEditable(false);
         textPaneInfoAbo.setFont(new Font("Tahoma", Font.BOLD, 14));
-        textPaneInfoAbo.setText("Tarif journalier\r\n\r\n- Sans abonnement --> Le prix hebdomadaire d'un vélo est de 20$ CAN\r\n\r\n- Abonnement --> Accès illimité pour louer un vélo d'une durée de 24 heures. \r\n\r\nNote : L'utilisateur devra rapporter son vélo avant les 24h . Dans le cas où il souhaite renouveller ou simplement rendre le vélo pour récupérer sa caution.");
+        textPaneInfoAbo.setText("Tarif journalier\r\n\r\n- Sans abonnement --> L'heure de location d'un vélo est de 5$ CAN\r\n\r\n- Abonnement --> Accès illimité pour louer un vélo d'une durée de 24 heures. \r\n\r\nNote : L'utilisateur devra rapporter son vélo avant les 24h . Dans le cas où il souhaite renouveller ou simplement rendre le vélo pour récupérer sa caution.");
         AideScrollPaneInfoAbo.setViewportView(textPaneInfoAbo);
         
         JTree AideTreeFAQ = new JTree();
