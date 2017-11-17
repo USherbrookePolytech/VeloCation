@@ -163,7 +163,7 @@ public class ProfilView extends AbstractView
         JLabel ProfilLblBonjourBienvenue = new JLabel("Bonjour ! Bienvenue sur votre profil ;)");
         ProfilLblBonjourBienvenue.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-        JLabel ProfilLblConnectEnTant = new JLabel("Connecté en tant que Dodu Efema");
+        JLabel ProfilLblConnectEnTant = new JLabel("Connecté en tant que XX XXX");
 
         JButton ProfilBtnDeconnexion = new JButton("Deconnexion");
         GroupLayout gl_ProfilPanel = new GroupLayout(ProfilPanel);

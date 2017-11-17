@@ -1,12 +1,15 @@
 package controller;
 
 import java.awt.Color;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import model.Abonnement;
 import sun.font.CreatedFontTracker;
 import view.InscriptionView;
 
@@ -16,6 +19,7 @@ import view.InscriptionView;
 public class InscriptionController extends AbstractController
 {
     private InscriptionView inscriptionView;
+    private int choixAbonnement;
 
     /**
      * @param inscriptionViewArg
@@ -192,6 +196,9 @@ public class InscriptionController extends AbstractController
 
     public void paiement(int i)
     {
+        // Garde l'abonnement
+        choixAbonnement = i;
+
         if (i == 1)
         {
             inscriptionView.getLblPrixTotal().setText("Prix total : 50$ CAN");
@@ -213,5 +220,39 @@ public class InscriptionController extends AbstractController
             inscriptionView.getTable().getModel().setValueAt("Abonnement", 0, 1);
             inscriptionView.getTable().getModel().setValueAt("540", 0, 2);
         }
+    }
+
+    public void validerInscription()
+    {
+        // Récupération des informations d'inscriptions
+        Abonnement abonnement;
+        String nom, prenom, telephone, courriel, adresse;
+
+        nom = inscriptionView.getTxtNom().getText();
+        prenom = inscriptionView.getTxtPrenom().getText();
+        telephone = inscriptionView.getTxtTelephone().getText();
+        courriel = inscriptionView.getTxtCourriel().getText();
+        adresse = inscriptionView.getTxtNumero() + " " + inscriptionView.getTxtCodepostal() + " "
+                + inscriptionView.getTxtVille();
+        
+        LocalDate date = LocalDate.now();
+        
+        if (choixAbonnement == 1)
+        {
+            date = date.plusMonths(1);
+            abonnement = new Abonnement("1", 50, 1, date);
+        }
+        else if (choixAbonnement == 2)
+        {
+            date = date.plusMonths(3);
+            abonnement = new Abonnement("2", 130, 3, date);
+        }
+        else
+        {
+            date = date.plusMonths(12);
+            abonnement = new Abonnement("3", 540, 12, date);
+        }
+
+        session.setMembre(session.nouveauAbo(nom, prenom, telephone, courriel, adresse, abonnement));
     }
 }

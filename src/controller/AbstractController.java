@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import model.Abonnement;
@@ -16,7 +17,6 @@ public abstract class AbstractController
     public static void init() 
     {
         session = new Session();
-        session.nouveauAbo("Baba", "Rere'", "+3369593949", "1 rue du truc", new Abonnement("1an", 500, 12, new Date()));
     }
 
     public void afficherAide()
@@ -33,4 +33,14 @@ public abstract class AbstractController
     {
 
     }
+
+    /**
+     * @return the session
+     */
+    public static Session getSession()
+    {
+        return session;
+    }
+    
+    
 }

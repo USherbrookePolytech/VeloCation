@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ public class Abonnement
     private String type;
     private double prix;
     private int duree;
-    private Date date;
+    private LocalDate date;
 
     /**
      * Instance d'un nouvel abonnement
@@ -21,7 +22,7 @@ public class Abonnement
      * @param duree
      * @param date
      */
-    public Abonnement(String type, double prix, int duree, Date date)
+    public Abonnement(String type, double prix, int duree, LocalDate date)
     {
         this.type = type;
         this.prix = prix;

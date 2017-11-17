@@ -78,7 +78,7 @@ public class InscriptionView extends AbstractView
         AbonnementsPanel.setBorder(new TitledBorder(null, "Choisissez votre abonnement", TitledBorder.LEADING,
                 TitledBorder.TOP, null, null));
 
-        JButton AbonnementsBtnAnnulerLinscription = new JButton("Annuler l'inscription");
+        JButton AbonnementsBtnAnnulerLinscription = new JButton("Annuler");
         AbonnementsBtnAnnulerLinscription.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -204,7 +204,6 @@ public class InscriptionView extends AbstractView
                                 .addGap(25)));
         AbonnementsPanel1An.setLayout(gl_AbonnementsPanel1An);
 
-        JButton AbonnementsBtnAide = new JButton("Aide");
         GroupLayout gl_AbonnementsPanel = new GroupLayout(AbonnementsPanel);
         gl_AbonnementsPanel.setHorizontalGroup(gl_AbonnementsPanel.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_AbonnementsPanel.createSequentialGroup().addContainerGap()
@@ -213,11 +212,10 @@ public class InscriptionView extends AbstractView
                                 .addComponent(AbonnementsPanelAbo3, GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                                 .addComponent(AbonnementsPanelAbo1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
                                         GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(AbonnementsBtnAide, Alignment.TRAILING))
+                                .addComponent(btnAide, Alignment.TRAILING))
                         .addContainerGap()));
-        gl_AbonnementsPanel.setVerticalGroup(gl_AbonnementsPanel.createParallelGroup(Alignment.LEADING).addGroup(
-                Alignment.TRAILING,
-                gl_AbonnementsPanel.createSequentialGroup().addComponent(AbonnementsBtnAide)
+        gl_AbonnementsPanel.setVerticalGroup(gl_AbonnementsPanel.createParallelGroup(Alignment.LEADING)
+                .addGroup(Alignment.TRAILING, gl_AbonnementsPanel.createSequentialGroup().addComponent(btnAide)
                         .addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(AbonnementsPanelAbo1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(ComponentPlacement.RELATED)
@@ -625,10 +623,12 @@ public class InscriptionView extends AbstractView
             {
                 frmPaiement.setVisible(false);
                 frmPaiementValid.setVisible(true);
+
+                inscriptionController.validerInscription();
             }
         });
 
-        JButton PaiementBtnAbandonner = new JButton("Abandonner");
+        JButton PaiementBtnAbandonner = new JButton("Annuler");
         PaiementBtnAbandonner.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -656,7 +656,6 @@ public class InscriptionView extends AbstractView
             }
         });
 
-        JButton btnAide = new JButton("Aide");
         GroupLayout gl_PaiementPanel = new GroupLayout(PaiementPanel);
         gl_PaiementPanel
                 .setHorizontalGroup(gl_PaiementPanel.createParallelGroup(Alignment.LEADING)
