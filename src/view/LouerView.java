@@ -15,6 +15,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +33,7 @@ public class LouerView extends AbstractView
     private JFrame frmLouer;
     private JFrame frmPaiement;
 
-    private JButton LouerBtnValider, LouerBtnAnnuler, btnRetourProfil;
+    private JButton LouerBtnValider, LouerBtnAnnuler;
 
     public LouerView()
     {
@@ -55,27 +57,37 @@ public class LouerView extends AbstractView
 
         JLabel LouerLblNombreDeVlo = new JLabel("Nombre de vélo souhaité :");
 
-        JSpinner LouerSpinnerVelo = new JSpinner();
+        SpinnerModel sm = new SpinnerNumberModel(1, 1, 9, 1);
+        JSpinner LouerSpinnerVelo = new JSpinner(sm);
 
         JLabel LouerLblVotreLocationSera = new JLabel("Votre location sera valable 24 heures");
         LouerLblVotreLocationSera.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-        LouerBtnValider = new JButton("Valider");
+        JButton LouerBtnValider = new JButton("Valider");
         LouerBtnValider.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent arg0)
+            public void actionPerformed(ActionEvent e)
             {
-                
+                frmLouer.setVisible(false);
+                accueilView.getLblEtesvousCertainDe()
+                        .setText("Êtes-vous certain de réserver " + LouerSpinnerVelo.getValue()
+                                + " vélos pour une caution totale de "
+                                + Integer.parseInt(LouerSpinnerVelo.getValue().toString()) * 200 + " $CAN ?");
+                accueilView.frmValiderPaiementAbo.setVisible(true);
             }
         });
 
-        LouerBtnAnnuler = new JButton("Annuler");
+        LouerBtnAnnuler = new JButton("");
         LouerBtnAnnuler.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent arg0)
+            public void actionPerformed(ActionEvent e)
             {
+                if (LouerBtnAnnuler.getText().equals("Annuler"))
+                    accueilView.getFrmAccueil().setVisible(true);
+                else
+                    accueilView.getProfilView().getFrmMonProfil().setVisible(true);
+
                 frmLouer.setVisible(false);
-                accueilView.getProfilView().getFrmMonProfil().setVisible(true);
             }
         });
 
@@ -83,22 +95,13 @@ public class LouerView extends AbstractView
 
         JLabel lblPourVlo = new JLabel("Pour 1 vélo");
         lblPourVlo.setFont(new Font("Tahoma", Font.BOLD, 13));
-
-        btnRetourProfil = new JButton("Retour profil");
-        btnRetourProfil.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent arg0)
-            {
-                frmLouer.setVisible(false);
-                accueilView.getProfilView().getFrmMonProfil().setVisible(true);
-            }
-        });
-
         GroupLayout gl_LouerPanel = new GroupLayout(LouerPanel);
         gl_LouerPanel.setHorizontalGroup(gl_LouerPanel.createParallelGroup(
                 Alignment.TRAILING)
-                .addGroup(gl_LouerPanel.createSequentialGroup().addGap(23).addGroup(gl_LouerPanel
-                        .createParallelGroup(Alignment.LEADING).addGroup(gl_LouerPanel
+                .addGroup(gl_LouerPanel
+                        .createSequentialGroup().addGap(
+                                23)
+                        .addGroup(gl_LouerPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_LouerPanel
                                 .createParallelGroup(Alignment.TRAILING, false)
                                 .addGroup(gl_LouerPanel.createSequentialGroup().addComponent(LouerLblVotreLocationSera)
                                         .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
@@ -107,10 +110,9 @@ public class LouerView extends AbstractView
                                                 GroupLayout.PREFERRED_SIZE))
                                 .addComponent(lblPourVlo, Alignment.LEADING).addComponent(scrollPane, Alignment.LEADING,
                                         GroupLayout.PREFERRED_SIZE, 417, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(gl_LouerPanel.createParallelGroup(Alignment.TRAILING).addComponent(btnRetourProfil)
                                 .addGroup(gl_LouerPanel.createSequentialGroup().addComponent(LouerLblNombreDeVlo)
                                         .addPreferredGap(ComponentPlacement.RELATED).addComponent(LouerSpinnerVelo,
-                                                GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))))
+                                                GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(17, Short.MAX_VALUE))
                 .addGroup(gl_LouerPanel.createSequentialGroup().addContainerGap(273, Short.MAX_VALUE)
                         .addComponent(LouerBtnAnnuler).addPreferredGap(ComponentPlacement.UNRELATED)
@@ -131,7 +133,7 @@ public class LouerView extends AbstractView
                                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(ComponentPlacement.UNRELATED)
                         .addGroup(gl_LouerPanel.createParallelGroup(Alignment.BASELINE).addComponent(LouerBtnValider)
-                                .addComponent(LouerBtnAnnuler).addComponent(btnRetourProfil))
+                                .addComponent(LouerBtnAnnuler))
                         .addContainerGap()));
 
         JTable table = new JTable();
@@ -172,13 +174,5 @@ public class LouerView extends AbstractView
     public JButton getLouerBtnAnnuler()
     {
         return LouerBtnAnnuler;
-    }
-
-    /**
-     * @return the btnRetourProfil
-     */
-    public JButton getBtnRetourProfil()
-    {
-        return btnRetourProfil;
     }
 }

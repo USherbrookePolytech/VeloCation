@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import model.Session;
+
 /**
  * Vue principale du package. L'accès au contrôleur est établi grâce à
  * l'attribut de type AccueilView
@@ -335,6 +337,7 @@ public abstract class AbstractView
         {
             public void actionPerformed(ActionEvent e)
             {
+                accueilView.getInscriptionController().validerInscription();
                 frmPaiementValid.setVisible(false);
                 accueilView.getProfilController().getProfilView().getFrmMonProfil().setVisible(true);
             }
@@ -358,7 +361,7 @@ public abstract class AbstractView
     {
         frmValiderPaiementAbo = new JFrame();
         frmValiderPaiementAbo.setTitle("Confirmation du paiement");
-        frmValiderPaiementAbo.setBounds(100, 100, 421, 132);
+        frmValiderPaiementAbo.setBounds(100, 100, 495, 132);
         frmValiderPaiementAbo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmValiderPaiementAbo.setLocationRelativeTo(null);
 
@@ -434,4 +437,13 @@ public abstract class AbstractView
     {
         return table;
     }
+
+    /**
+     * @return the lblEtesvousCertainDe
+     */
+    public static JLabel getLblEtesvousCertainDe()
+    {
+        return lblEtesvousCertainDe;
+    }
+
 }

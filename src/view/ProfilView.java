@@ -205,7 +205,7 @@ public class ProfilView extends AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 frmMonProfil.setVisible(false);
-                louerController.getLouerView().getFrmLouer().setVisible(true);
+                louerController.location();
             }
         });
 

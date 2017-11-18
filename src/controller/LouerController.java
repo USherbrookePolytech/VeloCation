@@ -19,10 +19,11 @@ public class LouerController extends AbstractController
         // Si on se connecte temporairement alors le bouton retour profil n'est
         // pas visible sinon il le sera
         if (session.getMembre() == null)
-            louerView.getBtnRetourProfil().setVisible(false);
+            louerView.getLouerBtnAnnuler().setText("Annuler");
+        else
+            louerView.getLouerBtnAnnuler().setText("Retour profil");
 
         louerView.getFrmLouer().setVisible(true);
-
     }
 
     public void finirLocation()
