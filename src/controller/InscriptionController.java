@@ -19,7 +19,6 @@ import view.InscriptionView;
 public class InscriptionController extends AbstractController
 {
     private InscriptionView inscriptionView;
-    private int choixAbonnement;
 
     /**
      * @param inscriptionViewArg
@@ -197,7 +196,7 @@ public class InscriptionController extends AbstractController
     public void paiement(int i)
     {
         // Garde l'abonnement
-        choixAbonnement = i;
+        inscriptionView.setChoixAbonnement(i);
 
         if (i == 1)
         {
@@ -234,15 +233,15 @@ public class InscriptionController extends AbstractController
         courriel = inscriptionView.getTxtCourriel().getText();
         adresse = inscriptionView.getTxtNumero() + " " + inscriptionView.getTxtCodepostal() + " "
                 + inscriptionView.getTxtVille();
-        
+
         LocalDate date = LocalDate.now();
-        
-        if (choixAbonnement == 1)
+
+        if (inscriptionView.getChoixAbonnement() == 1)
         {
             date = date.plusMonths(1);
             abonnement = new Abonnement("1", 50, 1, date);
         }
-        else if (choixAbonnement == 2)
+        else if (inscriptionView.getChoixAbonnement() == 2)
         {
             date = date.plusMonths(3);
             abonnement = new Abonnement("2", 130, 3, date);

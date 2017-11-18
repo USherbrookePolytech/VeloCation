@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,9 +8,17 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.ConnexionTempoController;
 import controller.InscriptionController;
@@ -29,6 +38,7 @@ public class AccueilView extends AbstractView
     private ProfilController profilController;
 
     private static JFrame frmAccueil;
+    private static JFrame frmPaiement;
 
     public AccueilView()
     {
@@ -182,5 +192,37 @@ public class AccueilView extends AbstractView
     public JFrame getFrmAccueil()
     {
         return frmAccueil;
+    }
+
+    /**
+     * @return the profilView
+     */
+    public ProfilView getProfilView()
+    {
+        return profilView;
+    }
+
+    /**
+     * @return the inscriptionView
+     */
+    public InscriptionView getInscriptionView()
+    {
+        return inscriptionView;
+    }
+
+    /**
+     * @return the inscriptionController
+     */
+    public InscriptionController getInscriptionController()
+    {
+        return inscriptionController;
+    }
+
+    /**
+     * @return the profilController
+     */
+    public ProfilController getProfilController()
+    {
+        return profilController;
     }
 }

@@ -34,7 +34,7 @@ public class ProfilView extends AbstractView
 
     private JFrame frmMonProfil;
     private JFrame frmScannerVotreCarte;
-    
+
     private JTextField CxCarteTxtId;
 
     public ProfilView(LouerController louerController)
@@ -53,60 +53,44 @@ public class ProfilView extends AbstractView
         frmScannerVotreCarte.setBounds(100, 100, 450, 184);
         frmScannerVotreCarte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmScannerVotreCarte.setLocationRelativeTo(null);
-        
+
         JButton CxCarteBtnAnnuler = new JButton("Annuler");
-        
+
         JLabel CxCarteLblScannerVotreCarte = new JLabel("Scanner votre carte sur le lecteur");
-        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));                
-        
+        CxCarteLblScannerVotreCarte.setFont(new Font("Tahoma", Font.BOLD, 16));
+
         JButton CxCarteBtnScanner = new JButton("Scanner");
-        
+
         JTextField CxCarteTxtId = new JTextField();
         CxCarteTxtId.setColumns(10);
-        
+
         JLabel CxCarteLblVotreId = new JLabel("Votre id :");
         GroupLayout groupLayout = new GroupLayout(frmScannerVotreCarte.getContentPane());
-        groupLayout.setHorizontalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(CxCarteLblScannerVotreCarte)
-                            .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(groupLayout.createSequentialGroup()
-                            .addGap(116)
-                            .addComponent(CxCarteLblVotreId)
-                            .addPreferredGap(ComponentPlacement.RELATED)
-                            .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap())
-                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-                    .addGap(97)
-                    .addComponent(CxCarteBtnScanner, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                    .addGap(85))
-                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-                    .addContainerGap(189, Short.MAX_VALUE)
-                    .addComponent(CxCarteBtnAnnuler)
-                    .addGap(176))
-        );
-        groupLayout.setVerticalGroup(
-            groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(btnAide)
-                        .addComponent(CxCarteLblScannerVotreCarte))
-                    .addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(CxCarteLblVotreId)
-                        .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                    .addComponent(CxCarteBtnScanner)
-                    .addGap(11)
-                    .addComponent(CxCarteBtnAnnuler)
-                    .addGap(33))
-        );
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+                .createSequentialGroup()
+                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup().addContainerGap()
+                                .addComponent(CxCarteLblScannerVotreCarte)
+                                .addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(groupLayout.createSequentialGroup().addGap(116).addComponent(CxCarteLblVotreId)
+                                .addPreferredGap(ComponentPlacement.RELATED).addComponent(CxCarteTxtId,
+                                        GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addGap(97)
+                        .addComponent(CxCarteBtnScanner, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE).addGap(85))
+                .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(189, Short.MAX_VALUE)
+                        .addComponent(CxCarteBtnAnnuler).addGap(176)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup().addContainerGap()
+                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnAide)
+                                .addComponent(CxCarteLblScannerVotreCarte))
+                        .addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(CxCarteLblVotreId)
+                                .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                        GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(CxCarteBtnScanner).addGap(11)
+                        .addComponent(CxCarteBtnAnnuler).addGap(33)));
         frmScannerVotreCarte.getContentPane().setLayout(groupLayout);
 
         // ActionListener
@@ -118,7 +102,7 @@ public class ProfilView extends AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 frmScannerVotreCarte.setVisible(false);
-                accueilView.getFrmAccueil().setVisible(true);             
+                accueilView.getFrmAccueil().setVisible(true);
             }
         });
 
@@ -127,17 +111,34 @@ public class ProfilView extends AbstractView
 
             @Override
             public void actionPerformed(ActionEvent e)
-            {                
-                try {
-                if(profilController.connexion(Integer.parseInt(CxCarteTxtId.getText()))) // Ceci est l'id card quand le périphérique scanner lit la carte (on simule)
-                    frmScannerVotreCarte.setVisible(false);
+            {
+                try
+                {
+                    if (profilController.connexion(Integer.parseInt(CxCarteTxtId.getText()))) // Ceci
+                                                                                              // est
+                                                                                              // l'id
+                                                                                              // card
+                                                                                              // quand
+                                                                                              // le
+                                                                                              // périphérique
+                                                                                              // scanner
+                                                                                              // lit
+                                                                                              // la
+                                                                                              // carte
+                                                                                              // (on
+                                                                                              // simule)
+                        frmScannerVotreCarte.setVisible(false);
                 }
-                catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(new JFrame(), "Erreur dans l'id !", "Dialog", JOptionPane.ERROR_MESSAGE);
+                catch (NumberFormatException exception)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), "Erreur dans l'id !", "Dialog",
+                            JOptionPane.ERROR_MESSAGE);
                     exception.printStackTrace();
-                }                
-                catch(Exception exception) {
-                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
+                }
+                catch (Exception exception)
+                {
+                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog",
+                            JOptionPane.ERROR_MESSAGE);
                     exception.printStackTrace();
                 }
             }
@@ -178,8 +179,8 @@ public class ProfilView extends AbstractView
                                                 .addComponent(btnAide))
                                 .addGroup(Alignment.LEADING,
                                         gl_ProfilPanel.createSequentialGroup().addComponent(ProfilLblConnectEnTant)
-                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                .addComponent(ProfilBtnDeconnexion)))
+                                                .addPreferredGap(ComponentPlacement.RELATED).addComponent(
+                                                        ProfilBtnDeconnexion)))
                         .addContainerGap()));
         gl_ProfilPanel.setVerticalGroup(gl_ProfilPanel.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_ProfilPanel.createSequentialGroup()
@@ -198,7 +199,15 @@ public class ProfilView extends AbstractView
         ProfilTabbedPane.addTab("Location", null, ProfilPanelLocation, null);
 
         JButton ProfilBtnLouer = new JButton("Louer");
-        //ProfilBtnLouer.setBackground(new Color(51, 204, 0));
+        ProfilBtnLouer.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                frmMonProfil.setVisible(false);
+                louerController.getLouerView().getFrmLouer().setVisible(true);
+            }
+        });
 
         JLabel ProfilLblMesLocationsCours = new JLabel("Historique de mes locations :");
         ProfilLblMesLocationsCours.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -257,8 +266,8 @@ public class ProfilView extends AbstractView
         JScrollPane ProfilScrollPaneInformation = new JScrollPane();
 
         JButton ProfilBtnSeDesinscrire = new JButton("Se désinscrire");
-        //ProfilBtnSeDesinscrire.setBackground(new Color(204, 0, 0));
-        
+        // ProfilBtnSeDesinscrire.setBackground(new Color(204, 0, 0));
+
         GroupLayout gl_ProfilPanelInformation = new GroupLayout(ProfilPanelInformation);
         gl_ProfilPanelInformation.setHorizontalGroup(gl_ProfilPanelInformation.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_ProfilPanelInformation.createSequentialGroup().addContainerGap()
@@ -308,13 +317,13 @@ public class ProfilView extends AbstractView
         JScrollPane ProfilScrollPaneInfoAbonnement = new JScrollPane();
 
         JButton ProfilButtonResilier = new JButton("Résilier");
-        //ProfilButtonResilier.setBackground(new Color(255, 0, 0));
+        // ProfilButtonResilier.setBackground(new Color(255, 0, 0));
 
         JButton ProfilBtnRenouveler = new JButton("Renouveler");
-        //ProfilBtnRenouveler.setBackground(new Color(51, 204, 0));
+        // ProfilBtnRenouveler.setBackground(new Color(51, 204, 0));
 
         JButton ProfilBtnChanger = new JButton("Changer");
-        //ProfilBtnChanger.setBackground(new Color(102, 204, 0));
+        // ProfilBtnChanger.setBackground(new Color(102, 204, 0));
         GroupLayout gl_ProfilPanelInfoAbonnement = new GroupLayout(ProfilPanelInfoAbonnement);
         gl_ProfilPanelInfoAbonnement.setHorizontalGroup(gl_ProfilPanelInfoAbonnement
                 .createParallelGroup(Alignment.LEADING)

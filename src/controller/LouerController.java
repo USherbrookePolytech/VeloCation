@@ -16,7 +16,13 @@ public class LouerController extends AbstractController
 
     public void location()
     {
+        // Si on se connecte temporairement alors le bouton retour profil n'est
+        // pas visible sinon il le sera
+        if (session.getMembre() == null)
+            louerView.getBtnRetourProfil().setVisible(false);
+
         louerView.getFrmLouer().setVisible(true);
+
     }
 
     public void finirLocation()
@@ -38,4 +44,13 @@ public class LouerController extends AbstractController
     {
 
     }
+
+    /**
+     * @return the louerView
+     */
+    public LouerView getLouerView()
+    {
+        return louerView;
+    }
+
 }
