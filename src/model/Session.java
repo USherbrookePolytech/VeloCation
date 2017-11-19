@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import controller.AbstractController;
@@ -18,49 +19,37 @@ public class Session
         this.borne = new Borne();
     }
 
-    public boolean connexion(int id) throws Exception
+    public boolean connexion(int id)
     {
         for (int boucle = 0; boucle < listMembre.size(); boucle++)
         {
+            System.out.println("Une entrée");
             if (id == listMembre.get(boucle).getId())
             {
                 membre = listMembre.get(boucle);
                 return true;
             }
         }
-
-        if (membre == null)
-            try
-            {
-                throw new Exception("Utilisateur non trouvé");
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
         return false;
     }
 
     public void deconnection()
     {
-    	membre = null;
-        AbstractView.initView();
-        AbstractController.init();
+        membre = null;
     }
 
     public MembreAbonne nouveauAbo(String nom, String prenom, String numTel, String courriel, String adresse,
-            Abonnement abonnement)
+            LocalDate dateNaiss, Abonnement abonnement)
     {
-        MembreAbonne membre = new MembreAbonne(listMembre.size(), nom, prenom, numTel, courriel, adresse, abonnement,
-                null);
+        MembreAbonne membre = new MembreAbonne(listMembre.size(), nom, prenom, numTel, courriel, adresse, dateNaiss,
+                abonnement, null);
         listMembre.add(membre);
         return membre;
     }
 
     public void supprimerMembre(Membre membre)
     {
-    	listMembre.remove(membre);
+        listMembre.remove(membre);
         AbstractView.initView();
         AbstractController.init();
     }

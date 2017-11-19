@@ -21,7 +21,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controller.LouerController;
-import controller.ProfilController;
 
 /**
  * Vue qui s'occupe de l'affichge de la partie location
@@ -29,10 +28,7 @@ import controller.ProfilController;
 public class LouerView extends AbstractView
 {
     private LouerController louerController;
-
     private JFrame frmLouer;
-    private JFrame frmPaiement;
-
     private JButton LouerBtnValider, LouerBtnAnnuler;
 
     public LouerView()
@@ -40,6 +36,8 @@ public class LouerView extends AbstractView
         this.louerController = new LouerController(this);
 
         initLouer();
+        initValiderPaiementCaution();
+        initValiderPaiementSansCompte();
     }
 
     private void initLouer()
@@ -69,11 +67,11 @@ public class LouerView extends AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 frmLouer.setVisible(false);
-                accueilView.getLblEtesvousCertainDe()
+                accueilView.getLblEtesvousCertainDee()
                         .setText("Êtes-vous certain de réserver " + LouerSpinnerVelo.getValue()
                                 + " vélos pour une caution totale de "
                                 + Integer.parseInt(LouerSpinnerVelo.getValue().toString()) * 200 + " $CAN ?");
-                accueilView.frmValiderPaiementAbo.setVisible(true);
+                accueilView.frmValiderPaiementCaution.setVisible(true);
             }
         });
 
@@ -150,14 +148,6 @@ public class LouerView extends AbstractView
     public JFrame getFrmLouer()
     {
         return frmLouer;
-    }
-
-    /**
-     * @return the frmPaiement
-     */
-    public JFrame getFrmPaiement()
-    {
-        return frmPaiement;
     }
 
     /**

@@ -12,6 +12,7 @@ public class MembreAbonne extends Membre
     private String prenom;
     private String courriel;
     private String adresse;
+    private LocalDate dateNaiss;
     private Abonnement abonnement;
 
     /**
@@ -27,13 +28,14 @@ public class MembreAbonne extends Membre
      * @param listeLocation
      */
     public MembreAbonne(int id, String nom, String prenom, String numTel, String courriel, String adresse,
-            Abonnement abonnement, ArrayList<Location> listeLocation)
+            LocalDate dateNaiss, Abonnement abonnement, ArrayList<Location> listeLocation)
     {
         super(id, numTel, listeLocation);
         this.nom = nom;
         this.prenom = prenom;
         this.courriel = courriel;
         this.adresse = adresse;
+        this.dateNaiss = dateNaiss;
         this.abonnement = abonnement;
     }
 
@@ -46,32 +48,32 @@ public class MembreAbonne extends Membre
     {
 
     }
-    
+
     public String getNom()
     {
-    	return nom;
+        return nom;
     }
-    
+
     public String getPrenom()
     {
         return prenom;
     }
-    
+
     public String getCourriel()
     {
         return courriel;
     }
-    
+
     public String getAdresse()
     {
-    	return adresse;
+        return adresse;
     }
-    
+
     public Abonnement getAbonnement()
     {
         return abonnement;
     }
-    
+
     public void setAbonnement(String type, double prix, int duree, LocalDate date)
     {
         this.abonnement.setType(type);
@@ -79,6 +81,22 @@ public class MembreAbonne extends Membre
         this.abonnement.setDuree(duree);
         this.abonnement.setDate(date);
     }
-    
+
+    /**
+     * @return the dateNaiss
+     */
+    public LocalDate getDateNaiss()
+    {
+        return dateNaiss;
+    }
+
+    /**
+     * @param dateNaiss
+     *            the dateNaiss to set
+     */
+    public void setDateNaiss(LocalDate dateNaiss)
+    {
+        this.dateNaiss = dateNaiss;
+    }
 
 }

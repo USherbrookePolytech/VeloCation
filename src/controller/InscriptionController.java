@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
@@ -82,6 +83,7 @@ public class InscriptionController extends AbstractController
         {
             inscriptionView.getLabelRequis7().setText("");
             inscriptionView.getTxtTelephone().setBorder(new LineBorder(Color.RED, 2));
+            estValide = false;
         }
         else
         {
@@ -93,6 +95,7 @@ public class InscriptionController extends AbstractController
         {
             inscriptionView.getLabelRequis8().setText("Ce champ est requis");
             inscriptionView.getDateChooser().setBorder(new LineBorder(Color.RED, 2));
+            estValide = false;
         }
         else
         {
@@ -147,7 +150,10 @@ public class InscriptionController extends AbstractController
             inscriptionView.getTxtCourriel().setBorder(new LineBorder(Color.GREEN, 2));
         }
         else
+        {
             inscriptionView.getTxtCourriel().setBorder(new LineBorder(Color.RED, 2));
+            estValide = false;
+        }
 
         return estValide;
     }
@@ -226,13 +232,16 @@ public class InscriptionController extends AbstractController
         // Récupération des informations d'inscriptions
         Abonnement abonnement;
         String nom, prenom, telephone, courriel, adresse;
+        LocalDate dateNaiss;
 
         nom = inscriptionView.getTxtNom().getText();
         prenom = inscriptionView.getTxtPrenom().getText();
         telephone = inscriptionView.getTxtTelephone().getText();
         courriel = inscriptionView.getTxtCourriel().getText();
-        adresse = inscriptionView.getTxtNumero() + " " + inscriptionView.getTxtCodepostal() + " "
-                + inscriptionView.getTxtVille();
+        adresse = inscriptionView.getTxtNumero().getText() + " " + inscriptionView.getTxtCodepostal().getText() + " "
+                + inscriptionView.getTxtVille().getText();
+        dateNaiss = LocalDate
+                .parse(new SimpleDateFormat("yyyy-MM-dd").format(inscriptionView.getDateChooser().getDate()));
 
         LocalDate date = LocalDate.now();
 
@@ -252,6 +261,6 @@ public class InscriptionController extends AbstractController
             abonnement = new Abonnement("3", 540, 12, date);
         }
 
-        session.setMembre(session.nouveauAbo(nom, prenom, telephone, courriel, adresse, abonnement));
+        session.setMembre(session.nouveauAbo(nom, prenom, telephone, courriel, adresse, dateNaiss, abonnement));
     }
 }

@@ -225,4 +225,12 @@ public class AccueilView extends AbstractView
     {
         return profilController;
     }
+
+    /**
+     * @return the louerView
+     */
+    public LouerView getLouerView()
+    {
+        return louerView;
+    }
 }

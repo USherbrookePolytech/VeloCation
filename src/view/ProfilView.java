@@ -37,7 +37,7 @@ public class ProfilView extends AbstractView
     private JFrame frmScannerVotreCarte;
 
     private JTextField CxCarteTxtId;
-    
+
     public JLabel ProfilLblConnectEnTant;
     public JTable ProfilTableInformation;
     public JTable ProfilTableInfoAbonnement;
@@ -117,35 +117,13 @@ public class ProfilView extends AbstractView
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                try
-                {
-                    if (profilController.connexion(Integer.parseInt(CxCarteTxtId.getText()))) // Ceci
-                                                                                              // est
-                                                                                              // l'id
-                                                                                              // card
-                                                                                              // quand
-                                                                                              // le
-                                                                                              // périphérique
-                                                                                              // scanner
-                                                                                              // lit
-                                                                                              // la
-                                                                                              // carte
-                                                                                              // (on
-                                                                                              // simule)
-                        frmScannerVotreCarte.setVisible(false);
-                }
-                catch (NumberFormatException exception)
-                {
+                // Ceci est l'id card quand le périphérique scanner lit la
+                // carte (on simule)
+                if (profilController.connexion(Integer.parseInt(CxCarteTxtId.getText())))
+                    frmScannerVotreCarte.setVisible(false);
+                else
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans l'id !", "Dialog",
                             JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
-                }
-                catch (Exception exception)
-                {
-                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog",
-                            JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
-                }
             }
 
         });
@@ -172,15 +150,16 @@ public class ProfilView extends AbstractView
         ProfilLblConnectEnTant = new JLabel("Connecté en tant que XX XXX");
 
         JButton ProfilBtnDeconnexion = new JButton("Deconnexion");
-        
+
         ProfilBtnDeconnexion.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
                 profilController.seDeconnecter();
+                accueilView.getFrmAccueil().setVisible(true);
             }
         });
-        
+
         GroupLayout gl_ProfilPanel = new GroupLayout(ProfilPanel);
         gl_ProfilPanel.setHorizontalGroup(gl_ProfilPanel.createParallelGroup(Alignment.TRAILING)
                 .addGroup(gl_ProfilPanel.createSequentialGroup().addContainerGap()
@@ -281,7 +260,7 @@ public class ProfilView extends AbstractView
 
         JButton ProfilBtnSeDesinscrire = new JButton("Se désinscrire");
         // ProfilBtnSeDesinscrire.setBackground(new Color(204, 0, 0));
-        
+
         ProfilBtnSeDesinscrire.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -309,7 +288,8 @@ public class ProfilView extends AbstractView
         ProfilTableInformation = new JTable();
         ProfilTableInformation.setShowHorizontalLines(false);
         ProfilTableInformation.setModel(new DefaultTableModel(
-                new Object[][] { { "Efema", "Dodu", "31/12/1996", new Integer(1) + " rue du Montagnais J1HQ23 Sherbrooke" }, },
+                new Object[][] {
+                        { "Efema", "Dodu", "31/12/1996", new Integer(1) + " rue du Montagnais J1HQ23 Sherbrooke" }, },
                 new String[] { "Nom", "Pr\u00E9nom", "Date Naissance", "Adresse" })
         {
             Class[] columnTypes = new Class[] { String.class, Object.class, Object.class, Integer.class, Object.class,
@@ -326,9 +306,9 @@ public class ProfilView extends AbstractView
         ProfilTableInformation.getColumnModel().getColumn(2).setPreferredWidth(96);
         ProfilTableInformation.getColumnModel().getColumn(3).setResizable(false);
         ProfilTableInformation.getColumnModel().getColumn(3).setPreferredWidth(300);
-        //ProfilTableInformation.getColumnModel().getColumn(4).setPreferredWidth(104);
-        //ProfilTableInformation.getColumnModel().getColumn(5).setPreferredWidth(67);
-        //ProfilTableInformation.getColumnModel().getColumn(6).setResizable(false);
+        // ProfilTableInformation.getColumnModel().getColumn(4).setPreferredWidth(104);
+        // ProfilTableInformation.getColumnModel().getColumn(5).setPreferredWidth(67);
+        // ProfilTableInformation.getColumnModel().getColumn(6).setResizable(false);
         ProfilScrollPaneInformation.setViewportView(ProfilTableInformation);
         ProfilPanelInformation.setLayout(gl_ProfilPanelInformation);
 
@@ -339,7 +319,7 @@ public class ProfilView extends AbstractView
 
         JButton ProfilButtonResilier = new JButton("Résilier");
         // ProfilButtonResilier.setBackground(new Color(255, 0, 0));
-        
+
         ProfilButtonResilier.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -351,7 +331,7 @@ public class ProfilView extends AbstractView
 
         JButton ProfilBtnRenouveler = new JButton("Renouveler");
         // ProfilBtnRenouveler.setBackground(new Color(51, 204, 0));
-        
+
         ProfilBtnRenouveler.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -363,7 +343,7 @@ public class ProfilView extends AbstractView
 
         JButton ProfilBtnChanger = new JButton("Changer");
         // ProfilBtnChanger.setBackground(new Color(102, 204, 0));
-        
+
         ProfilBtnChanger.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
@@ -372,7 +352,7 @@ public class ProfilView extends AbstractView
                 profilController.afficherAbo();
             }
         });
-        
+
         GroupLayout gl_ProfilPanelInfoAbonnement = new GroupLayout(ProfilPanelInfoAbonnement);
         gl_ProfilPanelInfoAbonnement.setHorizontalGroup(gl_ProfilPanelInfoAbonnement
                 .createParallelGroup(Alignment.LEADING)

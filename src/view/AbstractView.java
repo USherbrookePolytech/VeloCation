@@ -36,10 +36,12 @@ public abstract class AbstractView
     protected static JFrame frmPaiement;
     protected static JFrame frmPaiementValid;
     protected static JFrame frmValiderPaiementAbo;
+    protected static JFrame frmPaiementValidSansCompte;
+    protected static JFrame frmValiderPaiementCaution;
 
     protected static JButton btnAide = new JButton("Aide");
 
-    private static JLabel lblPrixTotal, lblEtesvousCertainDe;
+    private static JLabel lblPrixTotal, lblEtesvousCertainDe, lblEtesvousCertainDee;
     private static JTable table;
 
     // Initialisation de la vue d'accueil
@@ -359,6 +361,40 @@ public abstract class AbstractView
         frmPaiementValid.getContentPane().setLayout(groupLayout);
     }
 
+    public static void initValiderPaiementSansCompte()
+    {
+        frmPaiementValidSansCompte = new JFrame();
+        frmPaiementValidSansCompte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPaiementValidSansCompte.setResizable(false);
+        frmPaiementValidSansCompte.setBounds(0, 0, 192, 120);
+        frmPaiementValidSansCompte.setLocationRelativeTo(null);
+
+        JLabel lblPaiementValid = new JLabel("Paiement validé");
+
+        JButton btnAppuyerPourContinuer = new JButton("Appuyer pour continuer");
+        btnAppuyerPourContinuer.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmPaiementValidSansCompte.setVisible(false);
+                accueilView.getFrmAccueil().setVisible(true);
+            }
+        });
+
+        GroupLayout groupLayout = new GroupLayout(frmPaiementValidSansCompte.getContentPane());
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup()
+                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                .addGroup(groupLayout.createSequentialGroup().addGap(50).addComponent(lblPaiementValid))
+                                .addGroup(groupLayout.createSequentialGroup().addContainerGap()
+                                        .addComponent(btnAppuyerPourContinuer)))
+                        .addContainerGap(29, Short.MAX_VALUE)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup().addGap(21).addComponent(lblPaiementValid).addGap(18)
+                        .addComponent(btnAppuyerPourContinuer).addContainerGap(16, Short.MAX_VALUE)));
+        frmPaiementValidSansCompte.getContentPane().setLayout(groupLayout);
+    }
+
     public static void initValiderPaiementAbo()
     {
         frmValiderPaiementAbo = new JFrame();
@@ -424,6 +460,69 @@ public abstract class AbstractView
         frmValiderPaiementAbo.getContentPane().setLayout(groupLayout);
     }
 
+    public static void initValiderPaiementCaution()
+    {
+        frmValiderPaiementCaution = new JFrame();
+        frmValiderPaiementCaution.setTitle("Confirmation du paiement");
+        frmValiderPaiementCaution.setBounds(100, 100, 495, 132);
+        frmValiderPaiementCaution.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmValiderPaiementCaution.setLocationRelativeTo(null);
+
+        JLabel label = new JLabel("");
+
+        lblEtesvousCertainDee = new JLabel("Êtes-vous certain de souscrire à l'abonnement XX$ CAN / mois ?");
+
+        JButton btnModifierMonChoix = new JButton("Modifier mon choix");
+        btnModifierMonChoix.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmValiderPaiementCaution.setVisible(false);
+                accueilView.getLouerView().getFrmLouer().setVisible(true);
+            }
+        });
+
+        JButton btnAnnuler = new JButton("Annuler");
+        btnAnnuler.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmValiderPaiementCaution.setVisible(false);
+                accueilView.getFrmAccueil().setVisible(true);
+            }
+        });
+
+        JButton btnPayer = new JButton("Payer");
+        btnPayer.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                frmValiderPaiementCaution.setVisible(false);
+                frmPaiementValidSansCompte.setVisible(true);
+            }
+        });
+
+        GroupLayout groupLayout = new GroupLayout(frmValiderPaiementCaution.getContentPane());
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                        .addGroup(groupLayout.createParallelGroup(
+                                Alignment.LEADING)
+                                .addGroup(groupLayout.createSequentialGroup().addGap(121).addComponent(label))
+                                .addGroup(groupLayout.createSequentialGroup().addGap(31).addGroup(groupLayout
+                                        .createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+                                                .createSequentialGroup().addComponent(btnModifierMonChoix).addGap(66)
+                                                .addComponent(btnAnnuler).addPreferredGap(ComponentPlacement.RELATED)
+                                                .addComponent(btnPayer))
+                                        .addComponent(lblEtesvousCertainDee))))
+                        .addContainerGap(51, Short.MAX_VALUE)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup().addGap(19).addComponent(lblEtesvousCertainDee).addGap(18)
+                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnPayer)
+                                .addComponent(btnAnnuler).addComponent(btnModifierMonChoix))
+                        .addGap(34).addComponent(label).addContainerGap(154, Short.MAX_VALUE)));
+        frmValiderPaiementCaution.getContentPane().setLayout(groupLayout);
+    }
+
     /**
      * @return the lblPrixTotal
      */
@@ -446,6 +545,14 @@ public abstract class AbstractView
     public static JLabel getLblEtesvousCertainDe()
     {
         return lblEtesvousCertainDe;
+    }
+
+    /**
+     * @return the lblEtesvousCertainDee
+     */
+    public static JLabel getLblEtesvousCertainDee()
+    {
+        return lblEtesvousCertainDee;
     }
 
 }
