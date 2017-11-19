@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.AbstractController;
+import view.AbstractView;
+
 public class Session
 {
     private ArrayList<Membre> listMembre;
@@ -41,7 +44,9 @@ public class Session
 
     public void deconnection()
     {
-
+    	membre = null;
+        AbstractView.initView();
+        AbstractController.init();
     }
 
     public MembreAbonne nouveauAbo(String nom, String prenom, String numTel, String courriel, String adresse,
@@ -53,9 +58,11 @@ public class Session
         return membre;
     }
 
-    public void supprimer(int id)
+    public void supprimerMembre(Membre membre)
     {
-
+    	listMembre.remove(membre);
+        AbstractView.initView();
+        AbstractController.init();
     }
 
     public void connexionTemp(String numTel)

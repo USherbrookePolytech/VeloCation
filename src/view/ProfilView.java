@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.LouerController;
 import controller.ProfilController;
+import view.InscriptionView;
 
 /**
  * Vue qui s'occupe de l'affichge de la partie profil
@@ -36,6 +37,10 @@ public class ProfilView extends AbstractView
     private JFrame frmScannerVotreCarte;
 
     private JTextField CxCarteTxtId;
+    
+    public JLabel ProfilLblConnectEnTant;
+    public JTable ProfilTableInformation;
+    public JTable ProfilTableInfoAbonnement;
 
     public ProfilView(LouerController louerController)
     {
@@ -164,9 +169,18 @@ public class ProfilView extends AbstractView
         JLabel ProfilLblBonjourBienvenue = new JLabel("Profil");
         ProfilLblBonjourBienvenue.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-        JLabel ProfilLblConnectEnTant = new JLabel("Connecté en tant que XX XXX");
+        ProfilLblConnectEnTant = new JLabel("Connecté en tant que XX XXX");
 
         JButton ProfilBtnDeconnexion = new JButton("Deconnexion");
+        
+        ProfilBtnDeconnexion.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                profilController.seDeconnecter();
+            }
+        });
+        
         GroupLayout gl_ProfilPanel = new GroupLayout(ProfilPanel);
         gl_ProfilPanel.setHorizontalGroup(gl_ProfilPanel.createParallelGroup(Alignment.TRAILING)
                 .addGroup(gl_ProfilPanel.createSequentialGroup().addContainerGap()
@@ -267,6 +281,14 @@ public class ProfilView extends AbstractView
 
         JButton ProfilBtnSeDesinscrire = new JButton("Se désinscrire");
         // ProfilBtnSeDesinscrire.setBackground(new Color(204, 0, 0));
+        
+        ProfilBtnSeDesinscrire.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                profilController.supprimerCompte();
+            }
+        });
 
         GroupLayout gl_ProfilPanelInformation = new GroupLayout(ProfilPanelInformation);
         gl_ProfilPanelInformation.setHorizontalGroup(gl_ProfilPanelInformation.createParallelGroup(Alignment.LEADING)
@@ -284,12 +306,11 @@ public class ProfilView extends AbstractView
                                 GroupLayout.PREFERRED_SIZE)
                         .addGap(18).addComponent(ProfilBtnSeDesinscrire).addContainerGap(171, Short.MAX_VALUE)));
 
-        JTable ProfilTableInformation = new JTable();
+        ProfilTableInformation = new JTable();
         ProfilTableInformation.setShowHorizontalLines(false);
         ProfilTableInformation.setModel(new DefaultTableModel(
-                new Object[][] { { "Efema", "Dodu", "31/12/1996", new Integer(1), "rue du Montagnais", "J1HQ23",
-                        "Sherbrooke" }, },
-                new String[] { "Nom", "Pr\u00E9nom", "Date Naissance", "N\u00B0 voie", "Voie", "Code postal", "Ville" })
+                new Object[][] { { "Efema", "Dodu", "31/12/1996", new Integer(1) + " rue du Montagnais J1HQ23 Sherbrooke" }, },
+                new String[] { "Nom", "Pr\u00E9nom", "Date Naissance", "Adresse" })
         {
             Class[] columnTypes = new Class[] { String.class, Object.class, Object.class, Integer.class, Object.class,
                     Object.class, Object.class };
@@ -304,10 +325,10 @@ public class ProfilView extends AbstractView
         ProfilTableInformation.getColumnModel().getColumn(2).setResizable(false);
         ProfilTableInformation.getColumnModel().getColumn(2).setPreferredWidth(96);
         ProfilTableInformation.getColumnModel().getColumn(3).setResizable(false);
-        ProfilTableInformation.getColumnModel().getColumn(3).setPreferredWidth(45);
-        ProfilTableInformation.getColumnModel().getColumn(4).setPreferredWidth(104);
-        ProfilTableInformation.getColumnModel().getColumn(5).setPreferredWidth(67);
-        ProfilTableInformation.getColumnModel().getColumn(6).setResizable(false);
+        ProfilTableInformation.getColumnModel().getColumn(3).setPreferredWidth(300);
+        //ProfilTableInformation.getColumnModel().getColumn(4).setPreferredWidth(104);
+        //ProfilTableInformation.getColumnModel().getColumn(5).setPreferredWidth(67);
+        //ProfilTableInformation.getColumnModel().getColumn(6).setResizable(false);
         ProfilScrollPaneInformation.setViewportView(ProfilTableInformation);
         ProfilPanelInformation.setLayout(gl_ProfilPanelInformation);
 
@@ -318,12 +339,40 @@ public class ProfilView extends AbstractView
 
         JButton ProfilButtonResilier = new JButton("Résilier");
         // ProfilButtonResilier.setBackground(new Color(255, 0, 0));
+        
+        ProfilButtonResilier.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                profilController.supprimerAbo();
+                profilController.afficherAbo();
+            }
+        });
 
         JButton ProfilBtnRenouveler = new JButton("Renouveler");
         // ProfilBtnRenouveler.setBackground(new Color(51, 204, 0));
+        
+        ProfilBtnRenouveler.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                profilController.renouvelerAbo();
+                profilController.afficherAbo();
+            }
+        });
 
         JButton ProfilBtnChanger = new JButton("Changer");
         // ProfilBtnChanger.setBackground(new Color(102, 204, 0));
+        
+        ProfilBtnChanger.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                profilController.modifierAbo();
+                profilController.afficherAbo();
+            }
+        });
+        
         GroupLayout gl_ProfilPanelInfoAbonnement = new GroupLayout(ProfilPanelInfoAbonnement);
         gl_ProfilPanelInfoAbonnement.setHorizontalGroup(gl_ProfilPanelInfoAbonnement
                 .createParallelGroup(Alignment.LEADING)
@@ -347,7 +396,7 @@ public class ProfilView extends AbstractView
                                         .addComponent(ProfilBtnChanger))
                                 .addContainerGap(171, Short.MAX_VALUE)));
 
-        JTable ProfilTableInfoAbonnement = new JTable();
+        ProfilTableInfoAbonnement = new JTable();
         ProfilTableInfoAbonnement.setShowHorizontalLines(false);
         ProfilTableInfoAbonnement.setRowSelectionAllowed(false);
         ProfilTableInfoAbonnement.setModel(new DefaultTableModel(

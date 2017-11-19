@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -45,4 +46,39 @@ public class MembreAbonne extends Membre
     {
 
     }
+    
+    public String getNom()
+    {
+    	return nom;
+    }
+    
+    public String getPrenom()
+    {
+        return prenom;
+    }
+    
+    public String getCourriel()
+    {
+        return courriel;
+    }
+    
+    public String getAdresse()
+    {
+    	return adresse;
+    }
+    
+    public Abonnement getAbonnement()
+    {
+        return abonnement;
+    }
+    
+    public void setAbonnement(String type, double prix, int duree, LocalDate date)
+    {
+        this.abonnement.setType(type);
+        this.abonnement.setPrix(prix);
+        this.abonnement.setDuree(duree);
+        this.abonnement.setDate(date);
+    }
+    
+
 }

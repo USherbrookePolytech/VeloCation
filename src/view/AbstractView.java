@@ -338,6 +338,8 @@ public abstract class AbstractView
             public void actionPerformed(ActionEvent e)
             {
                 accueilView.getInscriptionController().validerInscription();
+                accueilView.getProfilController().afficherProfil();
+                accueilView.getProfilController().afficherAbo();
                 frmPaiementValid.setVisible(false);
                 accueilView.getProfilController().getProfilView().getFrmMonProfil().setVisible(true);
             }

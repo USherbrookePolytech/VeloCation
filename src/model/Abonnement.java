@@ -29,4 +29,44 @@ public class Abonnement
         this.duree = duree;
         this.date = date;
     }
+    
+    public String getType()
+    {
+    	return type;
+    }
+    
+    public Double getPrix()
+    {
+    	return prix;
+    }
+    
+    public int getDuree()
+    {
+    	return duree;
+    }
+    
+    public LocalDate getDate()
+    {
+    	return date;
+    }
+    
+    public void setType(String type)
+    {
+    	this.type = type;
+    }
+    
+    public void setPrix(double prix)
+    {
+    	this.prix = prix;
+    }
+    
+    public void setDuree(int duree)
+    {
+    	this.duree = duree;
+    }
+    
+    public void setDate(LocalDate date)
+    {
+    	this.date = date;
+    }
 }
