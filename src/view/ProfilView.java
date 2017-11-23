@@ -26,7 +26,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.LouerController;
 import controller.ProfilController;
-import view.InscriptionView;
 
 /**
  * Vue qui s'occupe de l'affichge de la partie profil
