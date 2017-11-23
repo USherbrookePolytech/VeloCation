@@ -73,7 +73,7 @@ public class AccueilView extends AbstractView
         JLabel AccueilLblVelocation = new JLabel("Bienvenue !");
         AccueilLblVelocation.setFont(new Font("Tahoma", Font.BOLD, 25));
         
-        JLabel AccueilLblBorne = new JLabel("Vous êtes sur la borne n°72");
+        JLabel AccueilLblBorne = new JLabel("Vous \u00EAtes sur la borne nÂ°72");
         AccueilLblBorne.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         JLabel AccueilLblBienvenue = new JLabel("5 rue de l'Interface - J1H Q4H Sherbrooke");
