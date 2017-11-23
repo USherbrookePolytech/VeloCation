@@ -3,6 +3,7 @@ package controller;
 import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 import model.MembreAbonne;
+import view.AccueilView;
 import view.ProfilView;
 import controller.AbstractController;
 
@@ -30,7 +31,8 @@ public class ProfilController extends AbstractController
     {
         profilView.getFrmMonProfil().setVisible(true);
         MembreAbonne membre = (MembreAbonne) session.getMembre();
-        profilView.labelPrenomNom.setText(membre.getPrenom() + " " + membre.getNom());
+
+        profilView.ProfilLblConnectEnTant.setText("Connect� en tant que " + membre.getPrenom() + membre.getNom());
         profilView.ProfilTableInformation
                 .setModel(new DefaultTableModel(
                         new Object[][] { { membre.getNom(), membre.getPrenom(), membre.getDateNaiss().toString(),
