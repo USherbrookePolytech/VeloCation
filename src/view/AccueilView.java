@@ -64,7 +64,7 @@ public class AccueilView extends AbstractView
         frmAccueil.setResizable(false);
         frmAccueil.getContentPane().setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 17));
         frmAccueil.setTitle("Accueil");
-        frmAccueil.setBounds(100, 100, 652, 242);
+        frmAccueil.setBounds(0, 0, 600, 500);
         frmAccueil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmAccueil.setLocationRelativeTo(null);
         GridBagLayout gridBagLayout = new GridBagLayout();
