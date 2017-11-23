@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.BevelBorder;
@@ -160,6 +161,8 @@ public class ConnexionTempoView extends AbstractView
                     
                     if(CxTempValidationTextFieldCode.getText().length() != 3)
                         throw new Exception("Erreur ! Le code doit être 3 chiffres !");
+                    else
+                        CxTempValidationTextFieldCode.setBorder(UIManager.getBorder("TextField.border"));
                     
                     frmConnexionTempValidation.setVisible(false);
                     connexionTempoController.creerUserTemp(CxTempTextFieldCode.getText(), CxTempTextFieldNumero.getText());
@@ -330,10 +333,10 @@ public class ConnexionTempoView extends AbstractView
                     if(CxTempTextFieldCode.getText().isEmpty())
                         throw new Exception("Erreur dans le code du pays !");
                     else
-                        CxTempTextFieldCode.setBorder(null);
+                        CxTempTextFieldCode.setBorder(UIManager.getBorder("TextField.border"));
                     
                     Integer.parseInt(CxTempTextFieldNumero.getText());
-                    CxTempTextFieldNumero.setBorder(null);                    
+                    CxTempTextFieldNumero.setBorder(UIManager.getBorder("TextField.border"));                    
                     
                     frmConnexionTemporaire.setVisible(false);
                     frmConnexionTempValidation.setVisible(true);
@@ -365,5 +368,29 @@ public class ConnexionTempoView extends AbstractView
     public JFrame getFrmConnexionTempValidation()
     {
         return frmConnexionTempValidation;
+    }
+
+    /**
+     * @return the cxTempTextFieldCode
+     */
+    public JTextField getCxTempTextFieldCode()
+    {
+        return CxTempTextFieldCode;
+    }
+
+    /**
+     * @return the cxTempTextFieldNumero
+     */
+    public JTextField getCxTempTextFieldNumero()
+    {
+        return CxTempTextFieldNumero;
+    }
+
+    /**
+     * @return the cxTempValidationTextFieldCode
+     */
+    public JTextField getCxTempValidationTextFieldCode()
+    {
+        return CxTempValidationTextFieldCode;
     }
 }

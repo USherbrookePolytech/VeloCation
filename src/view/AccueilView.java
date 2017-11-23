@@ -193,6 +193,8 @@ public class AccueilView extends AbstractView
             {
                 frmAccueil.setVisible(false);
                 connexionTempoController.numTel();
+                connexionTempoController.setEmptyBorder();
+                connexionTempoController.hideMessage();
             }
         });
 
