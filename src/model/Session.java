@@ -50,8 +50,6 @@ public class Session
     public void supprimerMembre(Membre membre)
     {
         listMembre.remove(membre);
-        AbstractView.initView();
-        AbstractController.init();
     }
 
     public void connexionTemp(String numTel)
