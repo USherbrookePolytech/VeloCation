@@ -151,6 +151,9 @@ public class AccueilView extends AbstractView
             {
                 frmAccueil.setVisible(false);
                 inscriptionController.inscrireMembre();
+                inscriptionController.hideMessage();
+                inscriptionController.resetValeur();
+                inscriptionController.setEmptyBorder();
             }
         });
 
