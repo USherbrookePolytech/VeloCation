@@ -198,6 +198,8 @@ public abstract class AbstractView
         AideScrollPaneFAQ.setViewportView(AideTreeFAQ);
         frmAide.getContentPane().setLayout(groupLayout);
 
+        btnAide.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        
         // ActionListener
 
         AideBtnRetour.addActionListener(new ActionListener()
