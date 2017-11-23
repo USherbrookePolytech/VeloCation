@@ -1,6 +1,8 @@
 package controller;
 
 import java.time.LocalDate;
+
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.MembreAbonne;
 import view.AccueilView;
@@ -157,5 +159,15 @@ public class ProfilController extends AbstractController
     public ProfilView getProfilView()
     {
         return profilView;
+    }
+    
+    public void setEmptyBorder()
+    {        
+        profilView.getCxCarteTxtId().setBorder(UIManager.getBorder("TextField.border"));
+    }
+
+    public void hideMessage()
+    {
+        profilView.getCxCarteTxtId().setText("");
     }
 }

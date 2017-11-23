@@ -205,6 +205,8 @@ public class AccueilView extends AbstractView
             {
                 frmAccueil.setVisible(false);
                 profilController.scannerCarte();
+                profilController.setEmptyBorder();
+                profilController.hideMessage();
             }
         });
 

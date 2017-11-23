@@ -17,10 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -235,11 +237,25 @@ public class ProfilView extends AbstractView
             {
                 // Ceci est l'id card quand le périphérique scanner lit la
                 // carte (on simule)
-                if (profilController.connexion(Integer.parseInt(CxCarteTxtId.getText())))
+                
+                try {
+                    if(!profilController.connexion(Integer.parseInt(CxCarteTxtId.getText())))
+                        throw new Exception("Compte client inexistant ! Contacter l'assistance ou réessayer.");
                     frmScannerVotreCarte.setVisible(false);
-                else
-                    JOptionPane.showMessageDialog(new JFrame(), "Erreur dans l'id !", "Dialog",
+                    profilController.getProfilView().getCxCarteTxtId().setBorder(UIManager.getBorder("TextField.border"));
+
+                } catch (NumberFormatException exception)
+                {
+                    profilController.getProfilView().getCxCarteTxtId().setBorder(new LineBorder(Color.RED, 2));
+                    JOptionPane.showMessageDialog(new JFrame(), "Saisir votre identifiant !", "Dialog",
                             JOptionPane.ERROR_MESSAGE);
+                }
+                catch (Exception exception)
+                {
+                    profilController.getProfilView().getCxCarteTxtId().setBorder(new LineBorder(Color.RED, 2));
+                    JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog",
+                            JOptionPane.ERROR_MESSAGE);
+                }
             }
 
         });
@@ -540,5 +556,13 @@ public class ProfilView extends AbstractView
     public JFrame getFrmScannerVotreCarte()
     {
         return frmScannerVotreCarte;
+    }
+
+    /**
+     * @return the cxCarteTxtId
+     */
+    public JTextField getCxCarteTxtId()
+    {
+        return CxCarteTxtId;
     }
 }
