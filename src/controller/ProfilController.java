@@ -3,7 +3,6 @@ package controller;
 import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 import model.MembreAbonne;
-import view.AccueilView;
 import view.ProfilView;
 import controller.AbstractController;
 

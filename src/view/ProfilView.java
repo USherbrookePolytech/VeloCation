@@ -274,6 +274,7 @@ public class ProfilView extends AbstractView
                 profilController.supprimerCompte();
             }
         });
+
         GroupLayout gl_ProfilPanelInformation = new GroupLayout(ProfilPanelInformation);
         gl_ProfilPanelInformation.setHorizontalGroup(gl_ProfilPanelInformation.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_ProfilPanelInformation.createSequentialGroup().addGroup(gl_ProfilPanelInformation
@@ -354,6 +355,7 @@ public class ProfilView extends AbstractView
         });
 
         GroupLayout gl_ProfilPanelInfoAbonnement = new GroupLayout(ProfilPanelInfoAbonnement);
+
         gl_ProfilPanelInfoAbonnement
                 .setHorizontalGroup(
                         gl_ProfilPanelInfoAbonnement
