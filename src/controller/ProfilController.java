@@ -170,4 +170,9 @@ public class ProfilController extends AbstractController
     {
         profilView.getCxCarteTxtId().setText("");
     }
+
+    public void maintenance()
+    {
+        profilView.getFrmMaintenance().setVisible(true);
+    }
 }
