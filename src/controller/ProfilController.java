@@ -32,7 +32,7 @@ public class ProfilController extends AbstractController
         profilView.getFrmMonProfil().setVisible(true);
         MembreAbonne membre = (MembreAbonne) session.getMembre();
 
-        profilView.ProfilLblConnectEnTant.setText("Connect� en tant que " + membre.getPrenom() + membre.getNom());
+        profilView.labelPrenomNom.setText(membre.getPrenom() + " " + membre.getNom());
         profilView.ProfilTableInformation
                 .setModel(new DefaultTableModel(
                         new Object[][] { { membre.getNom(), membre.getPrenom(), membre.getDateNaiss().toString(),
