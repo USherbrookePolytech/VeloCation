@@ -40,6 +40,7 @@ public class ProfilView extends AbstractView
 
     private JFrame frmMonProfil;
     private JFrame frmScannerVotreCarte;
+    private JFrame frmMaintenance;
 
     private JTextField CxCarteTxtId;
 
@@ -54,6 +55,7 @@ public class ProfilView extends AbstractView
 
         initProfil();
         initConnexionCarte();
+        initMaintenance();
     }
 
     private void initConnexionCarte()
@@ -160,7 +162,7 @@ public class ProfilView extends AbstractView
         CxCarteTxtId.setFont(new Font("Tahoma", Font.PLAIN, 14));
         CxCarteTxtId.setColumns(10);
 
-        JLabel CxCarteLblVotreId = new JLabel("Votre numéro client :");
+        JLabel CxCarteLblVotreId = new JLabel("Votre identifiant :");
         CxCarteLblVotreId.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         JLabel lblSaisirVotreIdentifiant = new JLabel("Saisir votre identifiant");
@@ -169,17 +171,17 @@ public class ProfilView extends AbstractView
         gl_CxCartePanelId.setHorizontalGroup(gl_CxCartePanelId.createParallelGroup(Alignment.TRAILING)
                 .addGroup(gl_CxCartePanelId.createSequentialGroup().addGap(179).addComponent(lblSaisirVotreIdentifiant)
                         .addContainerGap(174, Short.MAX_VALUE))
-                .addGroup(gl_CxCartePanelId.createSequentialGroup().addContainerGap(102, Short.MAX_VALUE)
+                .addGroup(gl_CxCartePanelId.createSequentialGroup().addContainerGap(115, Short.MAX_VALUE)
                         .addComponent(CxCarteLblVotreId).addPreferredGap(ComponentPlacement.UNRELATED)
                         .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-                        .addGap(98)));
+                        .addGap(110)));
         gl_CxCartePanelId.setVerticalGroup(gl_CxCartePanelId.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_CxCartePanelId.createSequentialGroup().addContainerGap()
                         .addComponent(lblSaisirVotreIdentifiant).addGap(18)
                         .addGroup(gl_CxCartePanelId.createParallelGroup(Alignment.BASELINE)
-                                .addComponent(CxCarteLblVotreId).addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE,
-                                        35, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(90, Short.MAX_VALUE)));
+                                .addComponent(CxCarteLblVotreId)
+                                .addComponent(CxCarteTxtId, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE)));
         CxCartePanelId.setLayout(gl_CxCartePanelId);
         CxCartePanel.setLayout(gl_CxCartePanel);
         frmScannerVotreCarte.getContentPane().setLayout(groupLayout);
@@ -205,14 +207,25 @@ public class ProfilView extends AbstractView
             {
                 // Ceci est l'id card quand le périphérique scanner lit la
                 // carte (on simule)
-                
-                try {
-                    if(!profilController.connexion(Integer.parseInt(CxCarteTxtId.getText())))
-                        throw new Exception("Compte client inexistant ! Contacter l'assistance ou réessayer.");
-                    frmScannerVotreCarte.setVisible(false);
-                    profilController.getProfilView().getCxCarteTxtId().setBorder(UIManager.getBorder("TextField.border"));
 
-                } catch (NumberFormatException exception)
+                try
+                {
+                    if (Integer.parseInt(CxCarteTxtId.getText()) == 123456789)
+                    {
+                        frmScannerVotreCarte.setVisible(false);
+                        profilController.maintenance();
+                    }
+                    else
+                    {
+                        if (!profilController.connexion(Integer.parseInt(CxCarteTxtId.getText())))
+                            throw new Exception("Compte client inexistant ! Contacter l'assistance ou réessayer.");
+
+                        frmScannerVotreCarte.setVisible(false);
+                        profilController.getProfilView().getCxCarteTxtId()
+                                .setBorder(UIManager.getBorder("TextField.border"));
+                    }
+                }
+                catch (NumberFormatException exception)
                 {
                     profilController.getProfilView().getCxCarteTxtId().setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Saisir votre identifiant !", "Dialog",
@@ -272,29 +285,25 @@ public class ProfilView extends AbstractView
         labelPrenomNom.setForeground(Color.RED);
         labelPrenomNom.setFont(new Font("Tahoma", Font.BOLD, 18));
         GroupLayout gl_ProfilPanel = new GroupLayout(ProfilPanel);
-        gl_ProfilPanel.setHorizontalGroup(gl_ProfilPanel.createParallelGroup(
-                Alignment.LEADING)
-                .addGroup(gl_ProfilPanel.createSequentialGroup().addGroup(gl_ProfilPanel
-                        .createParallelGroup(Alignment.LEADING).addGroup(gl_ProfilPanel
-                                .createSequentialGroup().addContainerGap().addGroup(gl_ProfilPanel
-                                        .createParallelGroup(Alignment.LEADING).addGroup(gl_ProfilPanel
-                                                .createSequentialGroup()
-                                                .addComponent(ProfilLblConnectEnTant, GroupLayout.PREFERRED_SIZE, 196,
-                                                        GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                .addComponent(labelPrenomNom))
-                                        .addComponent(ProfilTabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
-                                                562, Short.MAX_VALUE)
-                                        .addGroup(Alignment.TRAILING,
-                                                gl_ProfilPanel.createSequentialGroup()
-                                                        .addComponent(ProfilBtnDeconnexion)
-                                                        .addPreferredGap(ComponentPlacement.RELATED,
-                                                                393, Short.MAX_VALUE)
-                                                        .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 74,
-                                                                GroupLayout.PREFERRED_SIZE))))
+        gl_ProfilPanel.setHorizontalGroup(gl_ProfilPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_ProfilPanel
+                .createSequentialGroup()
+                .addGroup(gl_ProfilPanel.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_ProfilPanel.createSequentialGroup().addContainerGap().addGroup(gl_ProfilPanel
+                                .createParallelGroup(Alignment.LEADING)
+                                .addGroup(gl_ProfilPanel.createSequentialGroup()
+                                        .addComponent(ProfilLblConnectEnTant, GroupLayout.PREFERRED_SIZE, 196,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(ComponentPlacement.RELATED).addComponent(labelPrenomNom))
+                                .addComponent(ProfilTabbedPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 562,
+                                        Short.MAX_VALUE)
+                                .addGroup(Alignment.TRAILING,
+                                        gl_ProfilPanel.createSequentialGroup().addComponent(ProfilBtnDeconnexion)
+                                                .addPreferredGap(ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                                                .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 74,
+                                                        GroupLayout.PREFERRED_SIZE))))
                         .addGroup(gl_ProfilPanel.createSequentialGroup().addGap(20).addComponent(ProfilBtnLouer,
                                 GroupLayout.PREFERRED_SIZE, 537, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap()));
+                .addContainerGap()));
         gl_ProfilPanel.setVerticalGroup(gl_ProfilPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_ProfilPanel
                 .createSequentialGroup()
                 .addGroup(gl_ProfilPanel.createParallelGroup(Alignment.LEADING)
@@ -454,28 +463,22 @@ public class ProfilView extends AbstractView
         });
 
         GroupLayout gl_ProfilPanelInfoAbonnement = new GroupLayout(ProfilPanelInfoAbonnement);
-        gl_ProfilPanelInfoAbonnement
-                .setHorizontalGroup(
-                        gl_ProfilPanelInfoAbonnement
-                                .createParallelGroup(
-                                        Alignment.LEADING)
-                                .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup()
-                                        .addGroup(gl_ProfilPanelInfoAbonnement.createParallelGroup(Alignment.LEADING)
-                                                .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup()
-                                                        .addContainerGap().addComponent(ProfilScrollPaneInfoAbonnement,
-                                                                GroupLayout.PREFERRED_SIZE, 489,
-                                                                GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup()
-                                                        .addGap(65)
-                                                        .addComponent(ProfilButtonResilier, GroupLayout.PREFERRED_SIZE,
-                                                                129, GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18)
-                                                        .addComponent(ProfilBtnChanger, GroupLayout.PREFERRED_SIZE, 129,
-                                                                GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18).addComponent(ProfilBtnRenouveler,
-                                                                GroupLayout.PREFERRED_SIZE, 130,
-                                                                GroupLayout.PREFERRED_SIZE)))
-                                        .addContainerGap(58, Short.MAX_VALUE)));
+        gl_ProfilPanelInfoAbonnement.setHorizontalGroup(gl_ProfilPanelInfoAbonnement
+                .createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup()
+                        .addGroup(gl_ProfilPanelInfoAbonnement.createParallelGroup(Alignment.LEADING)
+                                .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup().addContainerGap()
+                                        .addComponent(ProfilScrollPaneInfoAbonnement, GroupLayout.PREFERRED_SIZE, 489,
+                                                GroupLayout.PREFERRED_SIZE))
+                                .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup().addGap(65)
+                                        .addComponent(ProfilButtonResilier, GroupLayout.PREFERRED_SIZE, 129,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18)
+                                        .addComponent(ProfilBtnChanger, GroupLayout.PREFERRED_SIZE, 129,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18).addComponent(ProfilBtnRenouveler, GroupLayout.PREFERRED_SIZE, 130,
+                                                GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(58, Short.MAX_VALUE)));
         gl_ProfilPanelInfoAbonnement.setVerticalGroup(gl_ProfilPanelInfoAbonnement
                 .createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_ProfilPanelInfoAbonnement.createSequentialGroup().addContainerGap()
@@ -523,6 +526,150 @@ public class ProfilView extends AbstractView
         ProfilPanel.setLayout(gl_ProfilPanel);
     }
 
+    public void initMaintenance()
+    {
+        frmMaintenance = new JFrame();
+        frmMaintenance.setTitle("Maintenance");
+        frmMaintenance.setBounds(0, 0, 600, 500);
+        frmMaintenance.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmMaintenance.setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        frmMaintenance.getContentPane().add(panel, BorderLayout.CENTER);
+
+        JPanel MaintPanelService = new JPanel();
+        MaintPanelService.setBorder(
+                new TitledBorder(null, "Service technique", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+
+        JPanel MaintPanelBouton = new JPanel();
+        GroupLayout gl_panel = new GroupLayout(panel);
+        gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+                .addGroup(gl_panel.createSequentialGroup().addContainerGap(498, Short.MAX_VALUE)
+                        .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                .addGroup(Alignment.LEADING,
+                        gl_panel.createSequentialGroup().addContainerGap()
+                                .addComponent(MaintPanelBouton, GroupLayout.PREFERRED_SIZE, 543,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(Alignment.LEADING,
+                        gl_panel.createSequentialGroup().addContainerGap().addComponent(MaintPanelService,
+                                GroupLayout.PREFERRED_SIZE, 551, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(23, Short.MAX_VALUE)));
+        gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panel.createSequentialGroup().addGap(10)
+                        .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(MaintPanelService, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                GroupLayout.PREFERRED_SIZE)
+                        .addGap(4)
+                        .addComponent(MaintPanelBouton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+                        .addGap(25)));
+
+        JButton btnFermerLaSession = new JButton("Fermer la session");
+        btnFermerLaSession.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        GroupLayout gl_MaintPanelBouton = new GroupLayout(MaintPanelBouton);
+        gl_MaintPanelBouton.setHorizontalGroup(gl_MaintPanelBouton.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_MaintPanelBouton.createSequentialGroup().addGap(174)
+                        .addComponent(btnFermerLaSession, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(175, Short.MAX_VALUE)));
+        gl_MaintPanelBouton.setVerticalGroup(gl_MaintPanelBouton.createParallelGroup(Alignment.LEADING)
+                .addComponent(btnFermerLaSession, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE));
+        MaintPanelBouton.setLayout(gl_MaintPanelBouton);
+
+        JPanel MaintPanelBorne = new JPanel();
+        MaintPanelBorne.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+
+        JPanel MaintPanelSocles = new JPanel();
+        MaintPanelSocles.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        GroupLayout gl_MaintPanelService = new GroupLayout(MaintPanelService);
+        gl_MaintPanelService.setHorizontalGroup(gl_MaintPanelService.createParallelGroup(Alignment.TRAILING)
+                .addGroup(gl_MaintPanelService.createSequentialGroup().addContainerGap()
+                        .addGroup(gl_MaintPanelService.createParallelGroup(Alignment.TRAILING)
+                                .addComponent(MaintPanelSocles, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 519,
+                                        Short.MAX_VALUE)
+                                .addComponent(MaintPanelBorne, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 520,
+                                        Short.MAX_VALUE))
+                        .addContainerGap()));
+        gl_MaintPanelService.setVerticalGroup(gl_MaintPanelService.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_MaintPanelService.createSequentialGroup().addContainerGap()
+                        .addComponent(MaintPanelBorne, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addComponent(MaintPanelSocles, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                        .addContainerGap()));
+
+        JLabel lblOprationSurLes = new JLabel("Opération sur les socles");
+        lblOprationSurLes.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+        JButton btnRinitialiserLesSocles = new JButton("Réinitialiser les socles");
+        btnRinitialiserLesSocles.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+        JButton btnAjouterDesSocles = new JButton("Ajouter des socles");
+        btnAjouterDesSocles.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        GroupLayout gl_MaintPanelSocles = new GroupLayout(MaintPanelSocles);
+        gl_MaintPanelSocles.setHorizontalGroup(gl_MaintPanelSocles.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_MaintPanelSocles.createSequentialGroup().addGroup(gl_MaintPanelSocles
+                        .createParallelGroup(Alignment.LEADING)
+                        .addGroup(
+                                gl_MaintPanelSocles.createSequentialGroup().addGap(178).addComponent(lblOprationSurLes))
+                        .addGroup(gl_MaintPanelSocles.createSequentialGroup().addGap(81)
+                                .addComponent(btnRinitialiserLesSocles).addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(btnAjouterDesSocles)))
+                        .addContainerGap(141, Short.MAX_VALUE)));
+        gl_MaintPanelSocles.setVerticalGroup(gl_MaintPanelSocles.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_MaintPanelSocles.createSequentialGroup().addContainerGap().addComponent(lblOprationSurLes)
+                        .addGap(18)
+                        .addGroup(gl_MaintPanelSocles.createParallelGroup(Alignment.LEADING, false)
+                                .addComponent(btnRinitialiserLesSocles, GroupLayout.PREFERRED_SIZE, 52,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAjouterDesSocles, GroupLayout.PREFERRED_SIZE, 52,
+                                        GroupLayout.PREFERRED_SIZE))
+                        .addGap(19)));
+        MaintPanelSocles.setLayout(gl_MaintPanelSocles);
+
+        JButton btnRedmarrerLaBorne = new JButton("Redémarrer la borne");
+        btnRedmarrerLaBorne.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+        JLabel lblOprationSurLa = new JLabel("Opération sur la borne");
+        lblOprationSurLa.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+        JButton btnMettreJour = new JButton("Mettre à jour la borne");
+        btnMettreJour.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        GroupLayout gl_MaintPanelBorne = new GroupLayout(MaintPanelBorne);
+        gl_MaintPanelBorne.setHorizontalGroup(gl_MaintPanelBorne.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_MaintPanelBorne.createSequentialGroup().addContainerGap(10, Short.MAX_VALUE)
+                        .addGroup(gl_MaintPanelBorne.createParallelGroup(Alignment.LEADING)
+                                .addGroup(Alignment.TRAILING,
+                                        gl_MaintPanelBorne.createSequentialGroup().addComponent(lblOprationSurLa)
+                                                .addGap(178))
+                                .addGroup(Alignment.TRAILING, gl_MaintPanelBorne
+                                        .createSequentialGroup().addComponent(btnRedmarrerLaBorne)
+                                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnMettreJour,
+                                                GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(57)))));
+        gl_MaintPanelBorne.setVerticalGroup(gl_MaintPanelBorne.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_MaintPanelBorne.createSequentialGroup().addContainerGap().addComponent(lblOprationSurLa)
+                        .addGap(26)
+                        .addGroup(gl_MaintPanelBorne.createParallelGroup(Alignment.LEADING)
+                                .addComponent(btnMettreJour, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)
+                                .addComponent(btnRedmarrerLaBorne, GroupLayout.PREFERRED_SIZE, 52,
+                                        GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()));
+        MaintPanelBorne.setLayout(gl_MaintPanelBorne);
+        MaintPanelService.setLayout(gl_MaintPanelService);
+        panel.setLayout(gl_panel);
+
+        // ActionListener
+        btnFermerLaSession.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {               
+                accueilView.getFrmAccueil().setVisible(true);
+            }
+        });
+    }
+
     /**
      * @return the frmMonProfil
      */
@@ -545,6 +692,14 @@ public class ProfilView extends AbstractView
     public JTextField getCxCarteTxtId()
     {
         return CxCarteTxtId;
+    }
+
+    /**
+     * @return the frmMaintenance
+     */
+    public JFrame getFrmMaintenance()
+    {
+        return frmMaintenance;
     }
 
 }
