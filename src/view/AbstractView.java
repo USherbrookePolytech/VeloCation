@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.JTree;
+import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -453,14 +454,43 @@ public abstract class AbstractView
     public static void initValiderPaiementSansCompte()
     {
         frmPaiementValidSansCompte = new JFrame();
+        frmPaiementValidSansCompte.setTitle("Paiement validé !");
         frmPaiementValidSansCompte.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmPaiementValidSansCompte.setResizable(false);
-        frmPaiementValidSansCompte.setBounds(0, 0, 192, 120);
+        frmPaiementValidSansCompte.setBounds(0, 0, 600, 500);
         frmPaiementValidSansCompte.setLocationRelativeTo(null);
-
+        
         JLabel lblPaiementValid = new JLabel("Paiement validé");
-
+        lblPaiementValid.setForeground(new Color(0, 128, 0));
+        lblPaiementValid.setFont(new Font("Tahoma", Font.PLAIN, 34));
+        lblPaiementValid.setIcon(new ImageIcon(AbstractView.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
+        
         JButton btnAppuyerPourContinuer = new JButton("Appuyer pour continuer");
+        btnAppuyerPourContinuer.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        GroupLayout groupLayout = new GroupLayout(frmPaiementValidSansCompte.getContentPane());
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addComponent(btnAppuyerPourContinuer, GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                            .addContainerGap())
+                        .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+                            .addComponent(lblPaiementValid)
+                            .addGap(158))))
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(115)
+                    .addComponent(lblPaiementValid)
+                    .addGap(87)
+                    .addComponent(btnAppuyerPourContinuer, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(147, Short.MAX_VALUE))
+        );
+        frmPaiementValidSansCompte.getContentPane().setLayout(groupLayout);
+        
         btnAppuyerPourContinuer.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -469,19 +499,6 @@ public abstract class AbstractView
                 accueilView.getFrmAccueil().setVisible(true);
             }
         });
-
-        GroupLayout groupLayout = new GroupLayout(frmPaiementValidSansCompte.getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                .addGroup(groupLayout.createSequentialGroup()
-                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                .addGroup(groupLayout.createSequentialGroup().addGap(50).addComponent(lblPaiementValid))
-                                .addGroup(groupLayout.createSequentialGroup().addContainerGap()
-                                        .addComponent(btnAppuyerPourContinuer)))
-                        .addContainerGap(29, Short.MAX_VALUE)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup().addGap(21).addComponent(lblPaiementValid).addGap(18)
-                        .addComponent(btnAppuyerPourContinuer).addContainerGap(16, Short.MAX_VALUE)));
-        frmPaiementValidSansCompte.getContentPane().setLayout(groupLayout);
     }
 
     public static void initValiderPaiementAbo()
@@ -491,6 +508,7 @@ public abstract class AbstractView
         frmValiderPaiementAbo.setBounds(0, 0, 600, 500);
         frmValiderPaiementAbo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmValiderPaiementAbo.setLocationRelativeTo(null);
+        frmValiderPaiementAbo.setResizable(false);
         
         lblEtesvousCertainDe = new JLabel("Êtes-vous certain de souscrire à l'abonnement XX$ CAN / mois ?");
         lblEtesvousCertainDe.setIcon(new ImageIcon(AbstractView.class.getResource("/javax/swing/plaf/metal/icons/Question.gif")));
@@ -589,15 +607,39 @@ public abstract class AbstractView
     {
         frmValiderPaiementCaution = new JFrame();
         frmValiderPaiementCaution.setTitle("Confirmation du paiement");
-        frmValiderPaiementCaution.setBounds(100, 100, 495, 132);
+        frmValiderPaiementCaution.setBounds(0, 0, 600, 500);
         frmValiderPaiementCaution.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmValiderPaiementCaution.setLocationRelativeTo(null);
-
-        JLabel label = new JLabel("");
-
-        lblEtesvousCertainDee = new JLabel("Êtes-vous certain de souscrire à l'abonnement XX$ CAN / mois ?");
+        frmValiderPaiementCaution.setResizable(false);
+        
+        lblEtesvousCertainDee = new JLabel("<html>Êtes-vous certain de réserver 4 vélos pour une <br>caution totale de 200$ CAN ?</html>");
+        lblEtesvousCertainDee.setHorizontalAlignment(SwingConstants.CENTER);
+        lblEtesvousCertainDee.setIcon(new ImageIcon(AbstractView.class.getResource("/javax/swing/plaf/metal/icons/Question.gif")));
+        lblEtesvousCertainDee.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        
+        JPanel panelBouton = new JPanel();
+        GroupLayout groupLayout = new GroupLayout(frmValiderPaiementCaution.getContentPane());
+        groupLayout.setHorizontalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                        .addComponent(panelBouton, GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                        .addComponent(lblEtesvousCertainDee, GroupLayout.PREFERRED_SIZE, 574, GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap())
+        );
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.TRAILING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(128)
+                    .addComponent(lblEtesvousCertainDee, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                    .addComponent(panelBouton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap())
+        );
 
         JButton btnModifierMonChoix = new JButton("Modifier mon choix");
+        btnModifierMonChoix.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnModifierMonChoix.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -608,6 +650,7 @@ public abstract class AbstractView
         });
 
         JButton btnAnnuler = new JButton("Annuler");
+        btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnAnnuler.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -618,6 +661,7 @@ public abstract class AbstractView
         });
 
         JButton btnPayer = new JButton("Payer");
+        btnPayer.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnPayer.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -627,24 +671,27 @@ public abstract class AbstractView
             }
         });
 
-        GroupLayout groupLayout = new GroupLayout(frmValiderPaiementCaution.getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup()
-                        .addGroup(groupLayout.createParallelGroup(
-                                Alignment.LEADING)
-                                .addGroup(groupLayout.createSequentialGroup().addGap(121).addComponent(label))
-                                .addGroup(groupLayout.createSequentialGroup().addGap(31).addGroup(groupLayout
-                                        .createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-                                                .createSequentialGroup().addComponent(btnModifierMonChoix).addGap(66)
-                                                .addComponent(btnAnnuler).addPreferredGap(ComponentPlacement.RELATED)
-                                                .addComponent(btnPayer))
-                                        .addComponent(lblEtesvousCertainDee))))
-                        .addContainerGap(51, Short.MAX_VALUE)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(groupLayout.createSequentialGroup().addGap(19).addComponent(lblEtesvousCertainDee).addGap(18)
-                        .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnPayer)
-                                .addComponent(btnAnnuler).addComponent(btnModifierMonChoix))
-                        .addGap(34).addComponent(label).addContainerGap(154, Short.MAX_VALUE)));
+        GroupLayout gl_panelBouton = new GroupLayout(panelBouton);
+        gl_panelBouton.setHorizontalGroup(
+            gl_panelBouton.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panelBouton.createSequentialGroup()
+                    .addComponent(btnModifierMonChoix, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                    .addComponent(btnAnnuler, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+                    .addGap(18)
+                    .addComponent(btnPayer, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
+        );
+        gl_panelBouton.setVerticalGroup(
+            gl_panelBouton.createParallelGroup(Alignment.LEADING)
+                .addGroup(Alignment.TRAILING, gl_panelBouton.createSequentialGroup()
+                    .addGroup(gl_panelBouton.createParallelGroup(Alignment.TRAILING)
+                        .addComponent(btnAnnuler, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                        .addGroup(gl_panelBouton.createParallelGroup(Alignment.BASELINE)
+                            .addComponent(btnModifierMonChoix, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .addComponent(btnPayer, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)))
+                    .addGap(20))
+        );
+        panelBouton.setLayout(gl_panelBouton);
         frmValiderPaiementCaution.getContentPane().setLayout(groupLayout);
     }
 

@@ -68,9 +68,9 @@ public class LouerView extends AbstractView
             {
                 frmLouer.setVisible(false);
                 accueilView.getLblEtesvousCertainDee()
-                        .setText("Êtes-vous certain de réserver " + LouerSpinnerVelo.getValue()
-                                + " vélos pour une caution totale de "
-                                + Integer.parseInt(LouerSpinnerVelo.getValue().toString()) * 200 + " $CAN ?");
+                        .setText("<html>Êtes-vous certain de réserver " + LouerSpinnerVelo.getValue()
+                                + " vélos pour une <br>caution totale de "
+                                + Integer.parseInt(LouerSpinnerVelo.getValue().toString()) * 200 + " $CAN ?</html>");
                 accueilView.frmValiderPaiementCaution.setVisible(true);
             }
         });
