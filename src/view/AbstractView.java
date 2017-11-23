@@ -289,7 +289,7 @@ public abstract class AbstractView
                             .addComponent(PaiementPanelBoutons, GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                             .addContainerGap())
                         .addGroup(Alignment.TRAILING, gl_PaiementPanel.createSequentialGroup()
-                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())))
         );
         gl_PaiementPanel.setVerticalGroup(
