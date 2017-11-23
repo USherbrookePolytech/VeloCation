@@ -363,14 +363,14 @@ public class InscriptionView extends AbstractView
                 .createSequentialGroup().addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
                         .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-                                .addComponent(CreationBtnReinitialiser, GroupLayout.PREFERRED_SIZE, 112,
+                                .addComponent(CreationBtnReinitialiser, GroupLayout.PREFERRED_SIZE, 120,
                                         GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CreationBtnRetour, GroupLayout.PREFERRED_SIZE, 98,
+                                .addComponent(CreationBtnRetour, GroupLayout.PREFERRED_SIZE, 120,
                                         GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                 .addComponent(
-                                        CreationBtnValider, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+                                        CreationBtnValider, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
                                 .addGap(92))
                         .addGroup(Alignment.TRAILING,
                                 groupLayout.createSequentialGroup()
@@ -392,10 +392,10 @@ public class InscriptionView extends AbstractView
                 .addGap(18).addComponent(lblChampObligatoire)
                 .addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(CreationBtnReinitialiser, GroupLayout.PREFERRED_SIZE, 45,
+                        .addComponent(CreationBtnReinitialiser, GroupLayout.PREFERRED_SIZE, 60,
                                 GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CreationBtnValider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CreationBtnRetour, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CreationBtnValider, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CreationBtnRetour, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
                 .addGap(15)));
 
         JLabel lblNumero = new JLabel("<html>Adresse <font color='red'>*</font></html>");
