@@ -168,13 +168,11 @@ public class ConnexionTempoView extends AbstractView
                 catch (NumberFormatException exception) {
                     CxTempValidationTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le code !", "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }
                 catch (Exception exception)
                 {
                     CxTempValidationTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }                
             }
         });
@@ -343,13 +341,11 @@ public class ConnexionTempoView extends AbstractView
                 catch (NumberFormatException exception) {
                     CxTempTextFieldNumero.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le numero !", "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }
                 catch (Exception exception)
                 {
                     CxTempTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }                    
             }
         });       
