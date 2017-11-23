@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.UIManager;
+
 import view.ConnexionTempoView;
 
 /**
@@ -28,5 +30,19 @@ public class ConnexionTempoController extends AbstractController
     public void creerUserTemp(String code, String num)
     {
         session.connexionTemp(code + num);
+    }
+    
+    public void setEmptyBorder()
+    {        
+        connexionTempoView.getCxTempTextFieldNumero().setBorder(UIManager.getBorder("TextField.border"));
+        connexionTempoView.getCxTempTextFieldCode().setBorder(UIManager.getBorder("TextField.border"));
+        connexionTempoView.getCxTempValidationTextFieldCode().setBorder(UIManager.getBorder("TextField.border"));
+    }
+
+    public void hideMessage()
+    {
+        connexionTempoView.getCxTempTextFieldNumero().setText("");
+        connexionTempoView.getCxTempTextFieldCode().setText("+33");
+        connexionTempoView.getCxTempValidationTextFieldCode().setText("");
     }
 }
