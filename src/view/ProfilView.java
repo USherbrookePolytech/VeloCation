@@ -604,7 +604,7 @@ public class ProfilView extends AbstractView
         JButton btnRinitialiserLesSocles = new JButton("Réinitialiser les socles");
         btnRinitialiserLesSocles.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-        JButton btnAjouterDesSocles = new JButton("Ajouter des socles");
+        JButton btnAjouterDesSocles = new JButton("Changer les socles");
         btnAjouterDesSocles.setFont(new Font("Tahoma", Font.PLAIN, 16));
         GroupLayout gl_MaintPanelSocles = new GroupLayout(MaintPanelSocles);
         gl_MaintPanelSocles.setHorizontalGroup(gl_MaintPanelSocles.createParallelGroup(Alignment.LEADING)
