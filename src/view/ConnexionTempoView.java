@@ -64,7 +64,7 @@ public class ConnexionTempoView extends AbstractView
                     .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
                         .addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                         .addComponent(CxTempValidationPanelBouton, GroupLayout.PREFERRED_SIZE, 564, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
                     .addContainerGap())
         );
         groupLayout.setVerticalGroup(
@@ -168,13 +168,11 @@ public class ConnexionTempoView extends AbstractView
                 catch (NumberFormatException exception) {
                     CxTempValidationTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le code !", "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }
                 catch (Exception exception)
                 {
                     CxTempValidationTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }                
             }
         });
@@ -214,7 +212,7 @@ public class ConnexionTempoView extends AbstractView
                             .addComponent(CxTempPanelSaisie, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(groupLayout.createSequentialGroup()
                             .addGap(500)
-                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAide, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
                         .addGroup(groupLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(CxTempPanelBouton, GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)))
@@ -343,13 +341,11 @@ public class ConnexionTempoView extends AbstractView
                 catch (NumberFormatException exception) {
                     CxTempTextFieldNumero.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), "Erreur dans le numero !", "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }
                 catch (Exception exception)
                 {
                     CxTempTextFieldCode.setBorder(new LineBorder(Color.RED, 2));
                     JOptionPane.showMessageDialog(new JFrame(), exception.getMessage(), "Dialog", JOptionPane.ERROR_MESSAGE);
-                    exception.printStackTrace();
                 }                    
             }
         });       
